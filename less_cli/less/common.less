@@ -1,0 +1,772 @@
+// --------------------------------------------------
+// & 自己
+// + 严格相邻
+// ~ 模糊相邻
+// > 一级子元素
+// 规范 1. content内容边距统一为15px;
+// 规范 2. content横向内容padding可有具体长度（px）;但无margin值;布局为flex自适应
+// Font
+// --------------------------------------------------
+@font-family-default: -apple-system-font,
+"Helvetica Neue",
+Helvetica,
+sans-serif;
+@font-size-default: 14px;
+@font-size-small: 12px;
+@font-weight: 500;
+@font-weight-light: 400;
+// margin padding
+// --------------------------------------------------
+@fly5: 5px;
+@fly10: 10px;
+@fly15: 15px;
+// Colors
+// --------------------------------------------------
+// 主色
+@color-primary: #3273dc;
+@color-danger: #E64340;
+@color-warning: #f60;
+@color-success: #4cd964;
+@color-primary-active: #2366d1;
+@color-danger-active: #CE3C39;
+@color-warning-active: darken(@color-warning, 10%);
+@color-success-active: darken(@color-success, 10%);
+@color-bg: #f8f8f8; //背景色
+@color-text: #000000; //文本色
+@color-text-secondary: #B2B2B2; //次级/tip文本色
+@color-text-gray: #999999; //灰色文本色
+@color-text-gray-light: #ccc; //更灰色文本色
+//链接色
+@color-link: @color-primary;
+@color-link-active: @color-primary-active;
+// Borders
+@border-color: #D9D9D9; //分割线以及边框的颜色
+// --------------------------------------------------------------------------------
+// button
+// init
+@flyBtnHeight: 46px;
+@flyBtnFontSize: 18px;
+@flyBtnFontColor: #FFFFFF;
+@flyBtnActiveFontColor: rgba(255, 255, 255, .6);
+@flyBtnDisabledFontColor: rgba(255, 255, 255, .6);
+@flyBtnBorderRadius: 5px;
+@flyBtnDefaultGap: 15px;
+// mini
+@flyBtnMiniFontSize: 13px;
+@flyBtnMiniHeight: 2.3;
+// default font color
+@flyBtnDefaultFontColor: #000000;
+@flyBtnDefaultActiveFontColor: rgba(0, 0, 0, .6);
+@flyBtnDefaultDisabledFontColor: rgba(0, 0, 0, .3);
+// default bg color
+@flyBtnDefaultBg: #F8F8F8;
+@flyBtnDefaultActiveBg: #DEDEDE;
+@flyBtnDefaultDisabledBg: #F7F7F7;
+// primary bg color
+@flyBtnPrimaryBg: #3273dc;
+@flyBtnPrimaryActiveBg: #2366d1;
+@flyBtnPrimaryDisabledBg: #3273dc;
+// success bg color
+@flyBtnSuccessBg: #23d160;
+@flyBtnSuccessActiveBg: #20bc56;
+@flyBtnSuccessDisabledBg: #23d160;
+// danger bg color
+@flyBtnDangerBg: #E64340;
+@flyBtnDangerActiveBg: #CE3C39;
+@flyBtnDangerDisabledBg: #EC8B89;
+// outline color
+@flyBtnOlPrimaryColor: rgba(50, 115, 220, 1);
+@flyBtnOlPrimaryBorderColor: rgba(50, 115, 220, 1);
+@flyBtnOlPrimaryActiveColor: rgba(50, 115, 220, .6);
+@flyBtnOlPrimaryActiveBorderColor: rgba(50, 115, 220, .6);
+@flyBtnOlDefaultColor: rgba(53, 53, 53, 1);
+@flyBtnOlDefaultBorderColor: rgba(53, 53, 53, 1);
+@flyBtnOlDefaultActiveColor: rgba(53, 53, 53, .6);
+@flyBtnOlDefaultActiveBorderColor: rgba(53, 53, 53, .6);
+// minins
+// IOS滑动回弹
+.scrollable() {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+// 清除浮动
+.clearfix() {
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+// 禁用IOS点击默认灰色高亮
+.setTapColor(@c: rgba(0, 0, 0, 0)) {
+    -webkit-tap-highlight-color: @c;
+}
+
+// 上下左右箭头
+._setArrow(@arrowsize, @borderColor, @borderWidth) {
+    display: inline-block;
+    height: @arrowsize;
+    width: @arrowsize;
+    border-width: @borderWidth @borderWidth 0 0;
+    border-color: @borderColor;
+    border-style: solid;
+}
+
+.setArrow(@direction, @arrowsize, @borderColor, @borderWidth) when (@direction =top) {
+    ._setArrow(@arrowsize, @borderColor, @borderWidth);
+    transform: matrix(0.71, -0.71, 0.71, 0.71, 0, 0); // rotate(-45deg)
+}
+
+.setArrow(@direction, @arrowsize, @borderColor, @borderWidth) when (@direction =right) {
+    ._setArrow(@arrowsize, @borderColor, @borderWidth);
+    transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0); // rotate(45deg);
+    position: relative;
+    top: -2px;
+}
+
+.setArrow(@direction, @arrowsize, @borderColor, @borderWidth) when (@direction =down) {
+    ._setArrow(@arrowsize, @borderColor, @borderWidth);
+    transform: matrix(-0.71, 0.71, -0.71, -0.71, 0, 0); // rotate(135deg);
+    position: relative;
+    top: -3px;
+}
+
+.setArrow(@direction, @arrowsize, @borderColor, @borderWidth) when (@direction =left) {
+    ._setArrow(@arrowsize, @borderColor, @borderWidth);
+    transform: matrix(-0.71, -0.71, 0.71, -0.71, 0, 0); // rotate(-135deg);
+    position: relative;
+    top: -2px;
+}
+
+// 设置边框（兼容视网膜屏）
+.setTopLine(@c: #C7C7C7) {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid @c;
+    color: @c;
+    transform-origin: 0 0;
+    transform: scaleY(0.5);
+}
+
+.setBottomLine(@c: #C7C7C7) {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid @c;
+    color: @c;
+    transform-origin: 0 100%;
+    transform: scaleY(0.5);
+}
+
+.setLeftLine(@c: #C7C7C7) {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    bottom: 0;
+    border-left: 1px solid @c;
+    color: @c;
+    transform-origin: 0 0;
+    transform: scaleX(0.5);
+}
+
+.setRightLine(@c: #C7C7C7) {
+    content: " ";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1px;
+    bottom: 0;
+    border-right: 1px solid @c;
+    color: @c;
+    transform-origin: 100% 0;
+    transform: scaleX(0.5);
+}
+
+// hairline
+.hairline(@position, @color) when (@position =top) {
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: auto;
+        right: auto;
+        height: 1px;
+        width: 100%;
+        background-color: @color;
+        display: block;
+        z-index: 15;
+        transform-origin: 50% 0%;
+        @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+            transform: scaleY(0.5);
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio: 3) {
+            transform: scaleY(0.33);
+        }
+    }
+}
+
+.hairline(@position, @color) when (@position =left) {
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: auto;
+        right: auto;
+        width: 1px;
+        height: 100%;
+        background-color: @color;
+        display: block;
+        z-index: 15;
+        transform-origin: 0% 50%;
+        @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+            transform: scaleY(0.5);
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio: 3) {
+            transform: scaleY(0.33);
+        }
+    }
+}
+
+.hairline(@position, @color) when (@position =bottom) {
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: auto;
+        top: auto;
+        height: 1px;
+        width: 100%;
+        background-color: @color;
+        display: block;
+        z-index: 15;
+        transform-origin: 50% 100%;
+        @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+            transform: scaleY(0.5);
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio: 3) {
+            transform: scaleY(0.33);
+        }
+    }
+}
+
+.hairline(@position, @color) when (@position =right) {
+    &:after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        left: auto;
+        bottom: auto;
+        width: 1px;
+        height: 100%;
+        background-color: @color;
+        display: block;
+        z-index: 15;
+        transform-origin: 100% 50%;
+        @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+            transform: scaleY(0.5);
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio: 3) {
+            transform: scaleY(0.33);
+        }
+    }
+}
+
+// For right and bottom
+.hairline-remove(@position) when not (@position =left) and not (@position =top) {
+    &:after {
+        display: none;
+    }
+}
+
+// For left and top
+.hairline-remove(@position) when not (@position =right) and not (@position =bottom) {
+    &:before {
+        display: none;
+    }
+}
+
+// For right and bottom
+.hairline-color(@position, @color) when not (@position =left) and not (@position =top) {
+    &:after {
+        background-color: @color;
+    }
+}
+
+// For left and top
+.hairline-color(@position, @color) when not (@position =right) and not (@position =bottom) {
+    &:before {
+        background-color: @color;
+    }
+}
+
+// 限制1行，多余字用...表示
+.ellipsis(@w: auto) {
+    width: @w;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+
+// 限制N行，多余字用...表示
+.ellipsisLn(@line) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: @line;
+}
+
+// 自动换行
+.text_wrap() {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+// 英文自动换行
+.hyphens() {
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+// flex
+.flexbox() {
+    display: flex;
+}
+
+.flex-wrap(@fw) when (@fw =nowrap) {
+    flex-wrap: nowrap;
+}
+
+.flex-wrap(@fw) when (@fw =wrap) {
+    flex-wrap: wrap;
+}
+
+.flex-wrap(@fw) when not (@fw =wrap) and not (@fw =nowrap) {
+    flex-wrap: @fw;
+}
+
+.flex-shrink(@fs) {
+    flex-shrink: @fs;
+}
+
+.justify-content(@jc) when (@jc =flex-start) {
+    justify-content: flex-start;
+}
+
+.justify-content(@jc) when (@jc =flex-end) {
+    justify-content: flex-end;
+}
+
+.justify-content(@jc) when (@jc =space-between) {
+    justify-content: space-between;
+}
+
+.justify-content(@jc) when not (@jc =flex-start) and not (@jc =flex-end) and not (@jc =space-between) {
+    justify-content: @jc;
+}
+
+.align-items(@ai) when (@ai =flex-start) {
+    align-items: flex-start;
+}
+
+.align-items(@ai) when (@ai =flex-end) {
+    align-items: flex-end;
+}
+
+.align-items(@ai) when not (@ai =flex-start) and not (@ai =flex-end) {
+    align-items: @ai;
+}
+
+.align-content(@ai) {
+    align-content: @ai;
+}
+
+.align-self(@as) {
+    align-self: @as;
+}
+
+// common
+body,html {
+    font-size: 14px
+}
+a,
+input,
+textarea,
+select,
+button {
+    outline: 0;
+}
+
+p {
+    font-size: @font-size-default;
+}
+
+small {
+    font-size: @font-size-small;
+}
+
+h1 {
+    font-size: 22px;
+    font-weight: @font-weight-light
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: @font-weight-light
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: @font-weight-light
+}
+
+pre {
+    white-space: pre-wrap!important;
+    word-wrap: break-word!important;
+}
+
+.fly-lead {
+    margin: 5px 0;
+    font-size: 16px;
+    font-weight: @font-weight-light
+}
+
+.fly-content {
+    padding: 15px;
+}
+
+.fly-text-center {
+    text-align: center!important;
+}
+
+.fly-text-left {
+    text-align: left!important;
+}
+
+.fly-text-right {
+    text-align: right!important;
+}
+
+.fly-pull-left {
+    float: left!important;
+}
+
+.fly-pull-right {
+    float: right!important;
+}
+
+.fly-color-danger {
+    color: @color-danger!important;
+}
+
+.fly-color-primary {
+    color: @color-primary!important;
+}
+
+.fly-color-success {
+    color: @color-success!important;
+}
+
+.fly-color-warning {
+    color: @color-warning!important;
+}
+
+.fly-bg-primary {
+    color: @color-primary!important;
+    color: white!important;
+}
+
+.fly-bg-danger {
+    color: @color-danger!important;
+    color: white!important;
+}
+
+.fly-bg-success {
+    color: @color-success!important;
+    color: white!important;
+}
+
+.fly-bg-warning {
+    color: @color-warning!important;
+    color: white!important;
+}
+
+.fly-font-bold {
+    font-weight: 500!important;
+}
+
+.fly-clearfix {
+    .clearfix();
+}
+
+.fly-no-margin {
+    margin: 0 !important;
+}
+
+.fly-no-padding {
+    padding: 0 !important;
+}
+
+.fly-p-l-0 {
+    padding-left: 0!important;
+}
+
+.fly-p-r-0 {
+    padding-right: 0!important;
+}
+
+.fly-p-t-0 {
+    padding-top: 0!important;
+}
+
+.fly-p-b-0 {
+    padding-bottom: 0!important;
+}
+
+.fly-m-l-0 {
+    margin-left: 0!important;
+}
+
+.fly-m-r-0 {
+    margin-right: 0!important;
+}
+
+.fly-m-t-0 {
+    margin-top: 0!important;
+}
+
+.fly-m-b-0 {
+    margin-bottom: 0!important;
+}
+
+.fly-m-t-sm {
+    margin-top: 5px !important;
+}
+
+.fly-m-t {
+    margin-top: 10px !important;
+}
+
+.fly-m-t-md {
+    margin-top: 15px !important;
+}
+
+.fly-m-t-lg {
+    margin-top: 20px !important;
+}
+
+.fly-m-b-sm {
+    margin-bottom: 5px !important;
+}
+
+.fly-m-b {
+    margin-bottom: 10px !important;
+}
+
+.fly-m-b-md {
+    margin-bottom: 15px !important;
+}
+
+.fly-m-b-lg {
+    margin-bottom: 20px !important;
+}
+
+.fly-m-r-sm {
+    margin-right: 5px !important;
+}
+
+.fly-m-r {
+    margin-right: 10px !important;
+}
+
+.fly-m-r-md {
+    margin-right: 15px !important;
+}
+
+.fly-m-r-lg {
+    margin-right: 20px !important;
+}
+
+.fly-m-l-sm {
+    margin-left: 5px !important;
+}
+
+.fly-m-l {
+    margin-left: 10px !important;
+}
+
+.fly-m-l-md {
+    margin-left: 15px !important;
+}
+
+.fly-m-l-lg {
+    margin-left: 20px !important;
+}
+
+.fly-margin-sm {
+    margin: 5px !important;
+}
+
+.fly-margin {
+    margin: 10px !important;
+}
+
+.fly-margin-md {
+    margin: 15px !important;
+}
+
+.fly-margin-lg {
+    margin: 20px !important;
+}
+
+.fly-padding-sm {
+    padding: 5px !important;
+}
+
+.fly-padding {
+    padding: 10px !important;
+}
+
+.fly-padding-md {
+    padding: 15px !important;
+}
+
+.fly-padding-lg {
+    padding: 20px !important;
+}
+
+.fly-p-t-sm {
+    padding-top: 5px !important;
+}
+
+.fly-p-t {
+    padding-top: 10px !important;
+}
+
+.fly-p-t-md {
+    padding-top: 15px !important;
+}
+
+.fly-p-t-lg {
+    padding-top: 20px !important;
+}
+
+.fly-p-b-sm {
+    padding-bottom: 5px !important;
+}
+
+.fly-p-b {
+    padding-bottom: 10px !important;
+}
+
+.fly-p-b-md {
+    padding-bottom: 15px !important;
+}
+
+.fly-p-b-lg {
+    padding-bottom: 20px !important;
+}
+
+.fly-p-r-sm {
+    padding-right: 5px !important;
+}
+
+.fly-p-r {
+    padding-right: 10px !important;
+}
+
+.fly-p-r-md {
+    padding-right: 15px !important;
+}
+
+.fly-p-r-lg {
+    padding-right: 20px !important;
+}
+
+.fly-p-l-sm {
+    padding-left: 5px !important;
+}
+
+.fly-p-l {
+    padding-left: 10px !important;
+}
+
+.fly-p-l-md {
+    padding-left: 15px !important;
+}
+
+.fly-p-l-lg {
+    padding-left: 20px !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fly-fade-in {
+    animation: fadeIn ease .3s forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.fly-fade-out {
+    animation: fadeOut ease .3s forwards;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translate3d(0, 100%, 0);
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.fly-slide-up {
+    animation: slideUp ease .3s forwards;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+    to {
+        transform: translate3d(0, 100%, 0);
+    }
+}
+
+.fly-slide-down {
+    animation: slideDown ease .3s forwards;
+}

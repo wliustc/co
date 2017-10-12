@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>邮乐活动 —— 炎炎夏日，冰爽低价</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="http://i1.beta.ulecdn.com/ulewap/ws/lib/css/weui.min.css">
+    <link rel="stylesheet" href="http://i1.beta.ulecdn.com/ulewap/ws/lib/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="http://i1.beta.ulecdn.com/ulewap/ws/20170928/css/summer.css">
+    <link rel="stylesheet" href="./css/ule.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" style="background-color:#39C1ED">
+
+        <div class="head">
+            <img src="http://i1.beta.ulecdn.com/ulewap/ws/20170928/images/head.jpg" alt="">
+        </div>
+
+        <div class="content">
+            <div class="activity">
+                <div class="activity-title">
+                    <img src="http://i1.beta.ulecdn.com/ulewap/ws/20170928/images/title_hot.png" alt="">
+                </div>
+                <div class="activity-content">
+                    <p>活动规则</p>
+                    <p>1.活动期间，每天上午10点，开始限时秒杀</p>
+                    <p>2.不支持游乐卡支付</p>
+                </div>
+            </div>
+            <div class="activity-list weui-row" v-cloak>
+                <div v-for="item in hotList" class="activity-shop weui-col-50">
+                    <img class="activity-shopimg" v-lazy="item.imgUrl" alt="">
+                    <div class="activity-name">
+                        <p class="activity-t1">{{ item.listingName }}</p>
+                        <!-- <p class="fly-lead" style="margin:0">保湿化妆品套装</p> -->
+                    </div>
+                    <div class="activity-price">
+                        <small style="color:#464646">优惠价</small>
+                        <small style="color:#E95555">￥</small>
+                        <small style="color:#E95555;font-size:18px;">{{ item.minPrice }}</small>
+                    </div>
+                    <div class="activity-price">
+                        <a @click="buy(item.listingId)" class="weui-btn weui-btn_warn buy-btn">立即抢购 &gt</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity">
+                <div class="activity-title">
+                    <img src="http://i1.beta.ulecdn.com/ulewap/ws/20170928/images/title_discount.png" alt="">
+                </div>
+                <div class="activity-content">
+                    <p>活动规则</p>
+                    <p>1.活动期间，每天上午10点，开始限时秒杀</p>
+                    <p>2.不支持游乐卡支付</p>
+                </div>
+            </div>
+            <div class="activity-list weui-row" v-cloak>
+                <div v-for="item in discountList" class="activity-shop weui-col-50">
+                    <img class="activity-shopimg" v-lazy="item.imgUrl" alt="">
+                    <div class="activity-name">
+                        <p class="activity-t1">{{ item.title }}</p>
+                        <!-- <p class="fly-lead" style="margin:0">保湿化妆品套装</p> -->
+                    </div>
+                    <div class="activity-price">
+                        <small style="color:#464646">优惠价</small>
+                        <small style="color:#E95555">￥</small>
+                        <small style="color:#E95555;font-size:18px;">{{ item.minPrice }}</small>
+                    </div>
+                    <div class="activity-price">
+                        <a @click="buy(item.itemId)" class="weui-btn weui-btn_warn buy-btn">立即抢购 &gt</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECKILL START -->
+        <section id="seckill" class="section">
+            <div class="clearfix">
+                <ul class="timeChoose"></ul>
+            </div>
+            <div class="clearfix ul-style ms_area wrapUl"></div>
+        </section>
+        <!-- / SECKILL END -->
+
+        <!-- <div class="tt">
+            <h2>
+                {{ message }}
+            </h2>
+        </div>
+        <div class="weui-flex" style="align-items:center">
+            <img style="height:100px" src="https://cn.vuejs.org/images/logo.png" alt="">
+            <div style="padding-left:6px" class="weui-flex__item">demo</div>
+        </div> -->
+    </div>
+
+</body>
+
+<script type="text/javascript" src="./lib/js/require.min.js" data-main="./js/app" async="true"></script>
+
+</html>

@@ -1,0 +1,77 @@
+@import "./less/variables.less";
+@import "./less/mixins.less";
+@import "./less/common.less";
+// @import "./less/grid.less";
+body {
+    max-width: 640px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.head {
+    width: 640px;
+    width: 100%;
+    img {
+        width: 100%;
+        height: auto
+    }
+}
+
+.buy-btn {
+    font-size: 12px;
+    display: inline-block;
+    background-color: #E95555;
+    border-radius: 10px;
+    color: #FCF1B9
+}
+
+.content {
+    padding: 10px;
+}
+
+.activity {
+    background-color: #9AE5FF;
+    padding: 20px;
+    color: #0D6CBC;
+    border-radius: 5px;
+    margin-top: 30px;
+    position: relative;
+    .activity-title{
+        position: absolute;
+        height: 40px;
+        width: 180px;
+        top:-20px;
+        left: 50%; 
+        margin-left: -105px;   
+        img{
+            height: 100%
+        }
+    }
+}
+
+.activity-list {
+    margin-top: 20px;
+    .activity-shop {
+        background-color: #ffffff;
+        margin-bottom: 10px;
+        .activity-shopimg {
+            display: block;
+            width: 100%
+        }
+        .activity-name {
+            margin: 10px 20px 0 20px;
+            border-top: dashed 1px #0D6CBC;
+            border-bottom: dashed 1px #0D6CBC;
+            color: #0D6CBC;
+            text-align: center;
+            padding: 5px 0;
+            .activity-t1{
+                .ellipsis()
+            }
+        }
+        .activity-price {
+            margin: 10px;
+            text-align: center
+        }
+    }
+}
