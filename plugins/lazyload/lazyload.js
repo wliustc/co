@@ -14,7 +14,7 @@
             dom: '.lazyload',
             background: backsvg,
             effect: 'fadeIn',
-            distance: 200
+            distance: 100
         };
         return $.extend(defaults, options)
     }
@@ -26,7 +26,7 @@
             var src = opts.background;
             $(opts.dom).css({
                 width: '100%'
-            }) && $(opts.dom).attr('src', opts.background)
+            }).attr('src', opts.background)
             // 窗口高度
             var winHeight = $(window).height();
             $(window).scroll(function() {

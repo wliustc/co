@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>lazybox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .head {
+            font-size: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .p {
+            padding: 10px;
+        }
+
+        .row {
+            box-sizing: border-box;
+        }
+
+        .row:before {
+            clear: both;
+        }
+
+        .row:after {
+            clear: both;
+        }
+
+        .col-5 {
+            box-sizing: border-box;
+            min-height: 1px;
+            position: relative;
+            width: 50%;
+            padding: 10px;
+            float: left
+        }
+    </style>
+</head>
+
+<body>
+    <div class="head lazybox">
+        lazybox
+    </div>
+    <div class="p lazybox">
+        下拉刷新、上拉加载、RefreshLayout、OverScroll，Android智能下拉刷新框架，支持越界回弹，具有极强的扩展性，集成了几十种炫酷的Header和 Footer
+    </div>
+    <div class="p lazybox">
+        下拉刷新、上拉加载、RefreshLayout、OverScroll，Android智能下拉刷新框架，支持越界回弹，具有极强的扩展性，集成了几十种炫酷的Header和 Footer
+    </div>
+    <div class="row">
+        <div class="col-5 lazybox">
+            SmartRefreshLayout的目标是打造一个强大，稳定，成熟的下拉刷新框架，并集成各种的炫酷、多样、实用、美观的Header和Footer。
+        </div>
+        <div class="col-5 lazybox">
+            视图结构。它继承自ViewGroup 而不是FrameLayout或LinearLayout，提高了性能。 也吸取了现在流行的各种刷新布局的优点
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5 lazybox">
+            SmartRefreshLayout的目标是打造一个强大，稳定，成熟的下拉刷新框架，并集成各种的炫酷、多样、实用、美观的Header和Footer。
+        </div>
+        <div class="col-5 lazybox">
+            视图结构。它继承自ViewGroup 而不是FrameLayout或LinearLayout，提高了性能。 也吸取了现在流行的各种刷新布局的优点
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5 lazybox">
+            SmartRefreshLayout的目标是打造一个强大，稳定，成熟的下拉刷新框架，并集成各种的炫酷、多样、实用、美观的Header和Footer。
+        </div>
+        <div class="col-5 lazybox">
+            视图结构。它继承自ViewGroup 而不是FrameLayout或LinearLayout，提高了性能。 也吸取了现在流行的各种刷新布局的优点
+        </div>
+    </div>
+</body>
+<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+<script src="./lazybox.js"></script>
+<script>
+    $.lazyboxShow({
+        dom: '.lazybox'
+    })
+    setTimeout(function() {
+        $.lazyboxHide({
+            dom: '.lazybox'
+        })
+    }, 2000);
+</script>
+
+</html>
