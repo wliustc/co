@@ -1,0 +1,320 @@
+// IOS滑动回弹
+.scrollable() {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+// 清除浮动
+.clearfix() {
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+// 禁用IOS点击默认灰色高亮
+.setTapColor(@c: rgba(0, 0, 0, 0)) {
+    -webkit-tap-highlight-color: @c;
+}
+
+// 上下左右箭头
+._setArrow(@arrowsize, @borderColor, @borderWidth) {
+    display: inline-block;
+    height: @arrowsize;
+    width: @arrowsize;
+    border-width: @borderWidth @borderWidth 0 0;
+    border-color: @borderColor;
+    border-style: solid;
+}
+
+.setArrow(@direction, @arrowsize, @borderColor, @borderWidth) when (@direction =top) {
+    ._setArrow(@arrowsize, @borderColor, @borderWidth);
+    transform: matrix(0.71, -0.71, 0.71, 0.71, 0, 0); // rotate(-45deg)
+}
+
+.setArrow(@direction, @arrowsize, @borderColor, @borderWidth) when (@direction =right) {
+    ._setArrow(@arrowsize, @borderColor, @borderWidth);
+    transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0); // rotate(45deg);
+    position: relative;
+    top: -2px;
+}
+
+.setArrow(@direction, @arrowsize, @borderColor, @borderWidth) when (@direction =down) {
+    ._setArrow(@arrowsize, @borderColor, @borderWidth);
+    transform: matrix(-0.71, 0.71, -0.71, -0.71, 0, 0); // rotate(135deg);
+    position: relative;
+    top: -3px;
+}
+
+.setArrow(@direction, @arrowsize, @borderColor, @borderWidth) when (@direction =left) {
+    ._setArrow(@arrowsize, @borderColor, @borderWidth);
+    transform: matrix(-0.71, -0.71, 0.71, -0.71, 0, 0); // rotate(-135deg);
+    position: relative;
+    top: -2px;
+}
+
+// 设置边框（兼容视网膜屏）
+.setTopLine(@c: #C7C7C7) {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid @c;
+    color: @c;
+    transform-origin: 0 0;
+    transform: scaleY(0.5);
+}
+
+.setBottomLine(@c: #C7C7C7) {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid @c;
+    color: @c;
+    transform-origin: 0 100%;
+    transform: scaleY(0.5);
+}
+
+.setLeftLine(@c: #C7C7C7) {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    bottom: 0;
+    border-left: 1px solid @c;
+    color: @c;
+    transform-origin: 0 0;
+    transform: scaleX(0.5);
+}
+
+.setRightLine(@c: #C7C7C7) {
+    content: " ";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1px;
+    bottom: 0;
+    border-right: 1px solid @c;
+    color: @c;
+    transform-origin: 100% 0;
+    transform: scaleX(0.5);
+}
+
+// hairline
+.hairline(@position, @color) when (@position =top) {
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: auto;
+        right: auto;
+        height: 1px;
+        width: 100%;
+        background-color: @color;
+        display: block;
+        z-index: 15;
+        transform-origin: 50% 0%;
+        @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+            transform: scaleY(0.5);
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio: 3) {
+            transform: scaleY(0.33);
+        }
+    }
+}
+
+.hairline(@position, @color) when (@position =left) {
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: auto;
+        right: auto;
+        width: 1px;
+        height: 100%;
+        background-color: @color;
+        display: block;
+        z-index: 15;
+        transform-origin: 0% 50%;
+        @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+            transform: scaleY(0.5);
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio: 3) {
+            transform: scaleY(0.33);
+        }
+    }
+}
+
+.hairline(@position, @color) when (@position =bottom) {
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: auto;
+        top: auto;
+        height: 1px;
+        width: 100%;
+        background-color: @color;
+        display: block;
+        z-index: 15;
+        transform-origin: 50% 100%;
+        @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+            transform: scaleY(0.5);
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio: 3) {
+            transform: scaleY(0.33);
+        }
+    }
+}
+
+.hairline(@position, @color) when (@position =right) {
+    &:after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        left: auto;
+        bottom: auto;
+        width: 1px;
+        height: 100%;
+        background-color: @color;
+        display: block;
+        z-index: 15;
+        transform-origin: 100% 50%;
+        @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+            transform: scaleY(0.5);
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio: 3) {
+            transform: scaleY(0.33);
+        }
+    }
+}
+
+// For right and bottom
+.hairline-remove(@position) when not (@position =left) and not (@position =top) {
+    &:after {
+        display: none;
+    }
+}
+
+// For left and top
+.hairline-remove(@position) when not (@position =right) and not (@position =bottom) {
+    &:before {
+        display: none;
+    }
+}
+
+// For right and bottom
+.hairline-color(@position, @color) when not (@position =left) and not (@position =top) {
+    &:after {
+        background-color: @color;
+    }
+}
+
+// For left and top
+.hairline-color(@position, @color) when not (@position =right) and not (@position =bottom) {
+    &:before {
+        background-color: @color;
+    }
+}
+
+// 限制1行，多余字用...表示
+.ellipsis(@w: auto) {
+    width: @w;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+
+// 限制N行，多余字用...表示
+.ellipsisLn(@line) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: @line;
+}
+
+// 自动换行
+.text_wrap() {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+// 英文自动换行
+.hyphens() {
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+// flex
+.flexbox() {
+    display: flex;
+}
+
+.flex-wrap(@fw) when (@fw =nowrap) {
+    flex-wrap: nowrap;
+}
+
+.flex-wrap(@fw) when (@fw =wrap) {
+    flex-wrap: wrap;
+}
+
+.flex-wrap(@fw) when not (@fw =wrap) and not (@fw =nowrap) {
+    flex-wrap: @fw;
+}
+
+.flex-shrink(@fs) {
+    flex-shrink: @fs;
+}
+
+.justify-content(@jc) when (@jc =flex-start) {
+    justify-content: flex-start;
+}
+
+.justify-content(@jc) when (@jc =flex-end) {
+    justify-content: flex-end;
+}
+
+.justify-content(@jc) when (@jc =space-between) {
+    justify-content: space-between;
+}
+
+.justify-content(@jc) when not (@jc =flex-start) and not (@jc =flex-end) and not (@jc =space-between) {
+    justify-content: @jc;
+}
+
+.align-items(@ai) when (@ai =flex-start) {
+    align-items: flex-start;
+}
+
+.align-items(@ai) when (@ai =flex-end) {
+    align-items: flex-end;
+}
+
+.align-items(@ai) when not (@ai =flex-start) and not (@ai =flex-end) {
+    align-items: @ai;
+}
+
+.align-content(@ai) {
+    align-content: @ai;
+}
+
+.align-self(@as) {
+    align-self: @as;
+}

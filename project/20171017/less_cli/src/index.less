@@ -1,0 +1,132 @@
+@import "./less/variables.less";
+@import "./less/mixins.less";
+@import "./less/common.less";
+* {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body {
+    max-width: 750px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.head {
+    width: 750px;
+    width: 100%;
+    img {
+        width: 100%;
+        height: auto
+    }
+}
+
+.tickets {
+    width: 750px;
+    width: 100%;
+    img {
+        width: 100%;
+        height: auto
+    }
+}
+
+.login-block {
+    padding: 10px;
+    border: 5px solid #efc9b2;
+    background: url(../images/login_bg.png) no-repeat;
+    background-size: cover;
+    p {
+        color: #ffffff;
+        text-align: center
+    }
+    input::-webkit-input-placeholder {
+        color: #7a3001;
+    }
+    input.login-input {
+        display: block;
+        height: 30px;
+        width: 100%;
+        padding: 0 5px;
+        box-sizing: border-box;
+    }
+    .login-btn {
+        background-color: #f9ea8d;
+        color: #d75c0e;
+        width: 120px;
+        border: 0;
+        height: 70px;
+        margin-left: 10px;
+        border-radius: 10px;
+        font-size: 16px;
+    }
+    .login-state {
+        color: #fbf202;
+        font-size: 16px;
+    }
+    .login-span {
+        background-color: #fedfa9;
+        color: #d75c0e;
+        display: inline-block;
+        padding: 0 5px;
+        border-radius: 15px;
+    }
+}
+
+.goods {
+    .goods-title {
+        padding: 10px 0;
+        text-align: center;
+        img {
+            width: 50%
+        }
+    }
+    .goods-content {
+        background-color: #f6cd53;
+        padding:0 5px 5px 5px;
+        .goods-block {
+            background-color: #ffffff;
+            padding: 2px;
+            margin-top: 5px;
+            .goods-img {
+                width: 100%;
+                display: block
+            }
+            .goods-title {
+                font-size: 12px;
+                text-align: left
+            }
+            .goods-car {
+                font-size: 12px;
+                width: 50%;
+                background-color: #f57426;
+                color: #ffffff;
+                border: 0;
+                padding: 1px 0
+            }
+        }
+    }
+}
+
+.rules {
+    padding: 10px;
+    .rules-title {
+        padding: 10px 0;
+        text-align: center;
+        img {
+            width: 50%
+        }
+    }
+    .rules-content {
+        background-color: #fffcdf;
+        padding: 20px;
+        border-radius: 10px;
+    }
+}
+
+.weui-row .weui-col-50 {
+    width: calc((100% - 1.5px*1)/ 2);
+}
