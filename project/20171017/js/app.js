@@ -35,7 +35,7 @@ requirejs.config({
 
 require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_wap', 'ule_extend'], function($, Vue, FastClick, VueLazyload) {
     Vue.use(VueLazyload, {
-        loading: 'http://i1.ulecdn.com/i/event/2016/0108/loading.gif',
+        loading: 'https://i0.ulecdn.com/ulewap/i/290x290x2x.png',
         listenEvents: ['scroll']
     })
 
@@ -47,11 +47,13 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
     new Vue({
         el: '#app',
         data: {
+            loadingShow: 1,
+            goodsImg: {},
             card: '',
             phone: '',
             // 活动API和key
-            actDate: {
-                keys: ['event_20170613_zk'],
+            actData: {
+                keys: 'jsjinronglvka', //正式：event_20171017_goods
                 api: {
                     getPrdsUrl: '//search.ule.com/api/recommend?jsoncallback=?&restype=2001', // 商品
                     queryQualification: '//prize.' + uleUrl + '/mc/jiangSuGreenCard/whiteListLogin', // 资格验证
@@ -60,28 +62,14 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
             },
             // 登录状态
             loginState: 0,
-            // 是否提交信息通过验证
+            // 是否提交信息通过验证,有无领券资格
             permissions: 0,
             // 商品列表
             goodsList: []
         },
-        beforeCreate: function() {
+        created: function() {
             // 初始化
             FastClick.attach(document.body)
-            $.showLoading();
-        },
-        created: function() {
-            // 1.商品推荐位
-
-            // 2.检查登录状态，如果登录显示已登录，反之显示没有登录
-            if (this.isLogin()) {
-                this.loginState = 1;
-            } else {
-                this.loginState = 0;
-            }
-            // 3.如果登录，则进入提交阶段，提交验证完成后，后端交互
-
-            // 4.如果确认有领券资格，则显示领券界面，反之仍然不显示
         },
         methods: {
             getCookie: function(name) {
@@ -99,6 +87,7 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                     return false;
                 }
             },
+            // 登录判断
             login: function() {
                 if ($.browser.ule) {
                     //邮乐app
@@ -113,38 +102,60 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                     }
                 }
             },
+            // 表单正则判断
             validateForm: function() {
                 var _self = this;
-                if((/(^\d{6}$)|(^\d{5}(\d|X|x)$)/).test(_self.card) && (/^(13|14|15|17|18)\d{9}$/).test(_self.phone)){
+                if ((/(^\d{6}$)|(^\d{5}(\d|X|x)$)/).test(_self.card) && (/^(13|14|15|17|18)\d{9}$/).test(_self.phone)) {
                     return true
-                }else{
+                } else {
                     return false
                 }
             },
+            // 验证资格
             yz: function() {
                 var _self = this;
                 if (this.loginState == 0) {
-                    $.confirm("您确定要前往登录吗?", "尚未登录", function() {
-                        _self.login();
-                    }, function() {});
+                    // $.confirm("您确定要前往登录吗?", "尚未登录", function() {
+                    //     _self.login();
+                    // }, function() {});
+                    $.alert("您尚未登录!");
                 } else {
                     // 开始验证
-                    if(_self.validateForm()){
-                        // 验证通过
-                        
-                    }else{
-                        // 验证失败
+                    if (_self.validateForm()) {
+                        // 前端验证通过，开始后端验证
+
+                        //后端验证提示信息成功OR失败
+
+                    } else {
+                        // 前端验证失败
                         $.alert("您输入的信息不符合格式!", "请重新输入!");
                     }
                 }
             },
-            getItems: function(key) {
+            // 领券
+            voucher: function() {
+                alert(123)
+            },
+            // 设置商品图片宽高
+            setImg: function() {
+                this.goodsImg.w = (screen.availWidth - 8) / 2 - 6
+                this.goodsImg.h = (screen.availWidth - 8) / 2 - 6
+            },
+            // 商品跳转
+            goodsJump: function(inStock, listingId) {
+                if (!!inStock) {
+                    location.href = shopUrl + listingId
+                }
+            },
+            // 获取推荐位
+            getItems: function() {
                 var _self = this
                 var data = {
-                    moduleKeys: key
+                    moduleKeys: _self.actData.keys,
+                    times: new Date().getTime()
                 };
                 $.ajax({
-                    url: '//static-content.ulecdn.com/mobilead/recommond/dwRecommond.do?restype=2001',
+                    url: _self.actData.api.getPrdsUrl,
                     type: 'get',
                     async: false,
                     data: data,
@@ -156,13 +167,27 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                         "Accept-Encoding": "gzip,deflate"
                     },
                     success: function(obj) {
-                        // console.log(obj)
+                        console.log(obj)
+                        _self.goodsList = obj.jsjinronglvka
+                        _self.setImg()
+                        _self.loadingShow = 0
                     }
                 });
             },
         },
         mounted: function() {
-                $.hideLoading();
+            // 1.检查登录状态，如果登录显示已登录，反之显示没有登录
+            if (this.isLogin()) {
+                this.loginState = 1;
+            } else {
+                this.loginState = 0;
+            }
+            // 2.商品推荐位
+            this.getItems()
+            // 3.如果登录，则进入验证阶段，验证完成后，后端交互
+
+            // 4.如果确认有领券资格，则显示领券界面，反之仍然不显示
+
         }
     })
 })
