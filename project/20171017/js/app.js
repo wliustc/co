@@ -15,6 +15,7 @@ requirejs.config({
         //         }
         //     }
         // }
+        "jw": ["jquery"],
         "ule_plugin": ["jquery"],
         "ule_wap": ["ule_plugin"],
         "ule_extend": ["ule_wap"],
@@ -22,6 +23,7 @@ requirejs.config({
     },
     paths: {
         'jquery': 'http://i1.beta.ulecdn.com/ulewap/ws/lib/js/jquery.min',
+        'jw': 'http://i1.beta.ulecdn.com/ulewap/ws/lib/js/jw/jquery-weui.min',
         'fastclick': 'http://i1.beta.ulecdn.com/ulewap/ws/lib/js/fastclick.min',
         'ule_plugin': 'ule_plugin',
         'ule_wap': 'ule_wap',
@@ -31,7 +33,7 @@ requirejs.config({
     }
 });
 
-require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'ule_plugin', 'ule_wap', 'ule_extend'], function($, Vue, FastClick, VueLazyload) {
+require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_wap', 'ule_extend'], function($, Vue, FastClick, VueLazyload) {
     Vue.use(VueLazyload, {
         loading: 'https://i0.ulecdn.com/ulewap/i/290x290x2x.png',
         listenEvents: ['scroll']
