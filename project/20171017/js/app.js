@@ -1,20 +1,6 @@
 requirejs.config({
     // baseUrl: '/',
     shim: {
-        //没有实现AMD规范的类库加载规范
-        // 'backbone': {
-        //     deps: ['underscore', 'jquery'],
-        //     exports: 'Backbone'
-        // },
-        // 暴露多个变量，不用exports,用init
-        // hello: {
-        //     init: function() {
-        //         return {
-        //             hello: hello,
-        //             hello2: hello2
-        //         }
-        //     }
-        // }
         "jw": ["jquery"],
         "ule_plugin": ["jquery"],
         "ule_wap": ["ule_plugin"],
@@ -48,15 +34,16 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
         el: '#app',
         data: {
             loadingShow: 1,
-            goodsImg: {},
+            goodsImg: {},//商品图片宽高参数
             card: '',
             phone: '',
             // 活动API和key
             actData: {
-                keys: 'jsjinronglvka', //正式：event_20171017_goods
+                keys: 'jsjinronglvka', //推荐位key 正式：event_20171017_goods
+                code: 'MA_U_150785973137187', //活动code
                 api: {
                     getPrdsUrl: '//search.ule.com/api/recommend?jsoncallback=?&restype=2001', // 商品
-                    queryQualification: '//prize.' + uleUrl + '/mc/jiangSuGreenCard/whiteListLogin', // 资格验证
+                    queryQualification: '//prize.' + uleUrl + '/mc/jiangSuFinance/whiteListVerification', // 资格验证
                     receivePrize: '//prize.' + uleUrl + '/mc/jiangSuGreenCard/receivePrize' // 领券
                 }
             },
@@ -122,8 +109,28 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                     // 开始验证
                     if (_self.validateForm()) {
                         // 前端验证通过，开始后端验证
-
-                        //后端验证提示信息成功OR失败
+                        $.ajax({
+                            url: _self.actData.api.queryQualification,
+                            type: 'get',
+                            async: false,
+                            data: {
+                                mobile: _self.phone,
+                                idNumber: _self.card,
+                                code: _self.actData.code
+                            },
+                            dataType: 'jsonp',
+                            jsonp: "jsonApiCallback",
+                            jsonpCallback: "jsonApiCallback",
+                            cache: true,
+                            headers: {
+                                "Accept-Encoding": "gzip,deflate"
+                            },
+                            success: function(obj) {
+                                //后端验证提示信息成功 弹窗 显示领券位
+                                console.log(obj)
+                                //后端验证提示信息失败 弹窗 显示失败原因
+                            }
+                        });
 
                     } else {
                         // 前端验证失败
