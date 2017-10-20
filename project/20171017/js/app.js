@@ -1,5 +1,4 @@
 requirejs.config({
-    // baseUrl: '/',
     shim: {
         "jw": ["jquery"],
         "ule_plugin": ["jquery"],
@@ -8,14 +7,14 @@ requirejs.config({
         "vue-lazyload": ["vue"],
     },
     paths: {
-        'jquery': 'http://i1.beta.ulecdn.com/ulewap/ws/lib/js/jquery.min',
-        'jw': 'http://i1.beta.ulecdn.com/ulewap/ws/lib/js/jw/jquery-weui.min',
-        'fastclick': 'http://i1.beta.ulecdn.com/ulewap/ws/lib/js/fastclick.min',
-        'ule_plugin': 'ule_plugin',
-        'ule_wap': 'ule_wap',
-        'ule_extend': 'ule_extend',
-        'vue': 'http://i1.beta.ulecdn.com/ulewap/ws/lib/js/vue.min',
-        'vue-lazyload': '../lib/js/vue-lazyload'
+        'jquery': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/jquery.min',
+        'jw': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/jw/jquery-weui.min',
+        'fastclick': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/fastclick.min',
+        'ule_plugin': 'https://i1.beta.ulecdn.com/ulewap/ws/20171020/js/ule_plugin',
+        'ule_wap': 'https://i1.beta.ulecdn.com/ulewap/ws/20171020/js/ule_wap',
+        'ule_extend': 'https://i1.beta.ulecdn.com/ulewap/ws/20171020/js/ule_extend',
+        'vue': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/vue.min',
+        'vue-lazyload': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/vue-lazyload'
     }
 });
 
@@ -34,7 +33,10 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
         el: '#app',
         data: {
             loadingShow: 1,
-            goodsImg: {},//商品图片宽高参数
+            goodsImg: {}, //商品图片宽高参数
+            boxType: '', //弹窗类型1、2、3、4、5、6、7...
+            boxShow: 0, //弹窗显示与否
+            boxMsg: '', //弹窗信息
             card: '',
             phone: '',
             // 活动API和key
@@ -44,7 +46,7 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                 api: {
                     getPrdsUrl: '//search.ule.com/api/recommend?jsoncallback=?&restype=2001', // 商品
                     queryQualification: '//prize.' + uleUrl + '/mc/jiangSuFinance/whiteListVerification', // 资格验证
-                    receivePrize: '//prize.' + uleUrl + '/mc/jiangSuGreenCard/receivePrize' // 领券
+                    receivePrize: '//prize.' + uleUrl + '/mc/jiangSuFinance/whiteListVerification' // 领券
                 }
             },
             // 登录状态
@@ -109,38 +111,56 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                     // 开始验证
                     if (_self.validateForm()) {
                         // 前端验证通过，开始后端验证
-                        $.ajax({
-                            url: _self.actData.api.queryQualification,
-                            type: 'get',
-                            async: false,
-                            data: {
-                                mobile: _self.phone,
-                                idNumber: _self.card,
-                                code: _self.actData.code
-                            },
-                            dataType: 'jsonp',
-                            jsonp: "jsonApiCallback",
-                            jsonpCallback: "jsonApiCallback",
-                            cache: true,
-                            headers: {
-                                "Accept-Encoding": "gzip,deflate"
-                            },
-                            success: function(obj) {
-                                //后端验证提示信息成功 弹窗 显示领券位
-                                console.log(obj)
-                                //后端验证提示信息失败 弹窗 显示失败原因
-                            }
-                        });
-
+                        _self.yzAjax();
                     } else {
                         // 前端验证失败
                         $.alert("您输入的信息不符合格式!", "请重新输入!");
                     }
                 }
             },
+            // 领券jump
+            voucherJump: function() {
+                var _self = this
+                _self.boxShow = 0
+                $('html, body').animate({
+                    scrollTop: $("#tickets").offset().top
+                }, 500);
+            },
             // 领券
             voucher: function() {
-                alert(123)
+                var _self = this
+                var data = {
+                    mobile: _self.phone,
+                    idNumber: _self.card,
+                    code: _self.actData.code,
+                    channel: 200000
+                }
+                $.ajax({
+                    url: _self.actData.api.receivePrize,
+                    type: 'get',
+                    cache: false,
+                    async: false,
+                    data: data,
+                    dataType: 'jsonp',
+                    jsonp: "callback",
+                    success: function(obj) {
+                        // 成功
+                        if (obj.code == '0001') {
+                            _self.boxShow = 1
+                            _self.boxType = 3
+                        }
+                        // 失败
+                        else {
+                            _self.boxShow = 1
+                            _self.boxType = 4
+                            _self.boxMsg = obj.message
+                        }
+                    }
+                })
+            },
+            // 关闭弹窗
+            closeBox: function() {
+                this.boxShow = 0
             },
             // 设置商品图片宽高
             setImg: function() {
@@ -152,6 +172,40 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                 if (!!inStock) {
                     location.href = shopUrl + listingId
                 }
+            },
+            // 验证资格ajax
+            yzAjax: function() {
+                var _self = this
+                var data = {
+                    mobile: _self.phone,
+                    idNumber: _self.card,
+                    code: _self.actData.code
+                }
+                $.ajax({
+                    url: _self.actData.api.queryQualification,
+                    type: 'get',
+                    cache: false,
+                    async: false,
+                    data: data,
+                    dataType: 'jsonp',
+                    jsonp: "callback",
+                    success: function(obj) {
+                        // 验证通过
+                        if (obj.code == '0001') {
+                            console.log("验证通过")
+                            _self.permissions = 1
+                            _self.boxShow = 1
+                            _self.boxType = 1
+                        }
+                        // 验证不通过
+                        else {
+                            _self.permissions = 0
+                            _self.boxShow = 1
+                            _self.boxType = 0
+                            _self.boxMsg = obj.message
+                        }
+                    }
+                })
             },
             // 获取推荐位
             getItems: function() {
@@ -173,7 +227,7 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                         "Accept-Encoding": "gzip,deflate"
                     },
                     success: function(obj) {
-                        console.log(obj)
+                        // console.log(obj.jsjinronglvka)
                         _self.goodsList = obj.jsjinronglvka
                         _self.setImg()
                         _self.loadingShow = 0

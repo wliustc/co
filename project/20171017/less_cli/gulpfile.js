@@ -29,17 +29,19 @@ gulp.task('less', function() {
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(postcss([autoprefixer(CSSRULES)]))
-        .pipe(header(banner, { pkg: pkg }))
+        .pipe(header(banner, {
+            pkg: pkg
+        }))
         .pipe(sourcemaps.write())
+        .pipe(gulp.dest(PROJECTURL))
+        .pipe(cssnano({
+            zindex: false,
+            autoprefixer: false
+        }))
+        .pipe(rename(function(path) {
+            path.basename += '.min';
+        }))
         .pipe(gulp.dest(PROJECTURL));
-    // .pipe(cssnano({
-    //     zindex: false,
-    //     autoprefixer: false
-    // }))
-    // .pipe(rename(function(path) {
-    //     path.basename += '.min';
-    // }))
-    // .pipe(gulp.dest(PROJECTURL));
 });
 
 gulp.task('watch', ['less'], function() {

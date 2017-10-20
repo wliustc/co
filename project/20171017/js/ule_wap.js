@@ -744,7 +744,7 @@ if ($.browser.wx) {
                 }
             }
             $(".headTitle").css({
-                "max-width": "640px",
+                "max-width": "750px",
                 "background": "rgba(255,255,255,0.95)",
                 "width": "100%",
                 "position": "relative",
