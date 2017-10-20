@@ -36,8 +36,16 @@
         <div class="login-block">
             <div class="weui-flex" style="align-items:center">
                 <div class="weui-flex__item">
-                    <input v-model="card" class="weui-input login-input" placeholder="请输入您的身份证后六位">
-                    <input v-model="phone" class="weui-input fly-m-t login-input" placeholder="请输入您的预留手机号">
+                    <div class="weui-cell" style="background:#ffffff">
+                        <div class="weui-cell__bd">
+                            <input v-model="card" class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入您的身份证后六位">
+                        </div>
+                    </div>
+                    <div class="weui-cell" style="background:#ffffff">
+                        <div class="weui-cell__bd">
+                            <input v-model="phone" class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入您的预留手机号">
+                        </div>
+                    </div>
                 </div>
                 <button class="login-btn" @click="yz()">提交验证信息</button>
             </div>
