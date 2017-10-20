@@ -115,10 +115,9 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
             yz: function() {
                 var _self = this;
                 if (this.loginState == 0) {
-                    // $.confirm("您确定要前往登录吗?", "尚未登录", function() {
-                    //     _self.login();
-                    // }, function() {});
-                    $.alert("您尚未登录!");
+                    $.confirm("您确定要前往登录吗?", "您尚未登录", function() {
+                        _self.login();
+                    }, function() {});
                 } else {
                     // 开始验证
                     if (_self.validateForm()) {
