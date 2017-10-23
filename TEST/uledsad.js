@@ -1,15 +1,3 @@
-/**
- * 常用函数
- */
-$.extend($.fn, {
-    attrJSON: function(attr) {
-        return (this.attr(attr || 'rel') || '').parseAttrJSON()
-    }
-});
-
-/**
- * String原型方法扩展
- */
 $.extend(String.prototype, {
     replaceAll: function(os, ns) {
         return this.replace(new RegExp(os, 'gm'), ns)
@@ -33,10 +21,6 @@ $.extend(String.prototype, {
         return (this.indexOf(str) >= 0) ? this.substring(0, this.indexOf(str)) : ''
     }
 });
-
-/**
- * JSONP
- */
 $.extend($, {
     getJSONPSUPER: function(url, options, data, callback) {
         var options = $.extend({
@@ -82,9 +66,6 @@ $.extend($, {
         head.appendChild(script)
     }
 });
-/**
- * 浏览器环境判断
- */
 $.browser = $.browser || {};
 $.extend($.browser, (function() {
     var ua = navigator.userAgent.toLowerCase(),
@@ -142,10 +123,6 @@ $.extend($.browser, (function() {
         }
     }
 })());
-
-/**
- * Date扩展
- */
 $.extend(Date.prototype, {
     parse: function(time) {
         if (typeof(time) == 'string') {
@@ -246,10 +223,6 @@ $.extend(Date.prototype, {
         return format
     }
 });
-
-/**
- * 全局变量（判断正式环境以及beta环境url）
- */
 var windowHref = window.location.host;
 var doMain = "beta.ule.com";
 var ulecdn = "beta.ulecdn.com";
@@ -257,10 +230,6 @@ if (windowHref.indexOf('ule.com') != -1 && windowHref.indexOf('beta.ule.com') ==
     doMain = 'ule.com';
     ulecdn = "ulecdn.com"
 }
-
-/**
- * 系统时间获取
- */
 system = {
     systemTime: {
         load: function(callback) {
@@ -293,20 +262,20 @@ system = {
     }
 };
 window.system = system;
-
-/**
- * 定义微信分享、秒杀、统计
- */
 (function($) {
     var uleUrl = location.host.substring(location.host.indexOf('.') + 1);
     var url = location.href;
     var doMain = 'ule.com';
     var shopUrl = '//m.ule.com/item/detail/';
     var storeUrl = '//m.ule.com/store/index/';
-
+    $.extend($.fn, {
+        attrJSON: function(attr) {
+            return (this.attr(attr || 'rel') || '').parseAttrJSON()
+        }
+    });
     var shareCall = function() {
-        var title = "邮乐919购物节 邮储手机银行 扫码特惠_邮乐网",
-            content = "邮乐919购物节 邮储手机银行 扫码特惠_邮乐网",
+        var title = "邮储手机银行欢乐购专场_爆款秒杀商品_优惠折扣商品_邮乐网",
+            content = "邮储手机银行欢乐购专场_爆款秒杀商品_优惠折扣商品_邮乐网",
             imgUrl = "https://i0.ule.com/ulewap/i/logo.png",
             linkUrl = location.href + '&ulespring=true';
         var linkStr = title + "##" + content + "##" + imgUrl + "##" + linkUrl + "&&WX##WF##QQ";
@@ -319,7 +288,6 @@ window.system = system;
         }
     };
     window.shareCall = shareCall;
-
     var _tip, tID;
     var tipBox = function(msg) {
         if (!msg) return;
@@ -446,9 +414,6 @@ window.system = system;
                 };
                 return opt
             }
-            /**
-             * 配置秒杀项
-             */
             system.systemTime.load(function() {
                 var options = loadRadom();
                 $('#seckill .wrapUl').seckillService(options, conpts,
@@ -510,13 +475,12 @@ window.system = system;
     };
     khj.init()
 })($);
-
 if ($.browser.wx) {
     $(function() {
         var uleUrl = "ule.com";
-        var wxshare_title = '邮爱传万家，跨年大聚惠';
+        var wxshare_title = '邮储手机银行欢乐购专场_爆款秒杀商品_优惠折扣商品_邮乐网';
         var wxshare_link = location.href;
-        var wxshare_desc = "邮爱传万家，跨年大聚惠";
+        var wxshare_desc = "邮储手机银行欢乐购专场_爆款秒杀商品_优惠折扣商品_邮乐网";
         var wxshare_imgurl = "https://i0.ule.com/ulewap/i/logo.png";
         var wxshare = {
             appkey: {
@@ -617,8 +581,7 @@ if ($.browser.wx) {
         };
         wxshare.init()
     })
-}
-(function($) {
+}(function($) {
     if (typeof JEND == "undefined") {
         window.JEND = {}
     }
@@ -665,11 +628,7 @@ if ($.browser.wx) {
         }
     };
     JEND.track.init()
-})(jQuery);
-
-/**
- * 页面head
- */
+})(Zepto);
 (function($) {
     var innerHead = {
         init: function() {
@@ -744,7 +703,7 @@ if ($.browser.wx) {
                 }
             }
             $(".headTitle").css({
-                "max-width": "750px",
+                "max-width": "640px",
                 "background": "rgba(255,255,255,0.95)",
                 "width": "100%",
                 "position": "relative",
