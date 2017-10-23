@@ -13,13 +13,6 @@
     <link rel="stylesheet" href="https://i1.beta.ulecdn.com/ulewap/ws/lib/css/weui.min.css">
     <link rel="stylesheet" href="https://i1.beta.ulecdn.com/ulewap/ws/lib/css/jquery-weui.min.css">
     <link rel="stylesheet" href="https://i1.beta.ulecdn.com/ulewap/ws/20171020/css/base.min.css">
-    <link rel="stylesheet" href="https://i1.beta.ulecdn.com/ulewap/ws/20171020/css/iconfont.min.css">
-    <link rel="stylesheet" href="https://i1.beta.ulecdn.com/ulewap/ws/lib/css/loadme.min.css">
-    <style>
-        [v-cloak] {
-            display: none;
-        }
-    </style>
 </head>
 
 <body>
@@ -58,9 +51,12 @@
 
         <div v-cloak v-if="loginState == 1 && permissions == 1">
             <!-- 领券 -->
-            <div id="tickets" class="tickets fly-m-t">
+            <div v-if="isHaveStock == 1" id="tickets" class="tickets fly-m-t">
                 <img style="display:block" src="https://i1.beta.ulecdn.com/ulewap/ws/20171020/images/done.png" alt="">
                 <button class="tickets-hot" @click="voucher()"></button>
+            </div>
+            <div v-else id="tickets" class="tickets fly-m-t">
+                <img style="display:block" src="https://i1.beta.ulecdn.com/ulewap/ws/20171020/images/over.png" alt="">
             </div>
         </div>
         <!-- 兑换商品 -->

@@ -1,6 +1,9 @@
+@import "./less/loadme.less";
 @import "./less/variables.less";
 @import "./less/mixins.less";
-@import "./less/common.less";
+@import "./less/fly.less";
+@import "../../css/iconfont.less";
+// base
 body {
     max-width: 750px;
     width: 100%;
@@ -169,6 +172,15 @@ body {
     }
 }
 
+// weui extend
 .weui-btn:after {
     border: 0
+}
+
+// vue style
+[v-cloak] {
+    display: none;
+}
+img[lazy=loaded] {
+    animation: fadeIn ease 1s forwards;
 }

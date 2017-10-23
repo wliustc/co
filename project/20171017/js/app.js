@@ -3,7 +3,7 @@ requirejs.config({
         "jw": ["jquery"],
         "ule_plugin": ["jquery"],
         "ule_wap": ["ule_plugin"],
-        "ule_extend": ["ule_wap"],
+        // "ule_extend": ["ule_wap"],
         "vue-lazyload": ["vue"],
     },
     paths: {
@@ -12,13 +12,13 @@ requirejs.config({
         'fastclick': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/fastclick.min',
         'ule_plugin': 'https://i1.beta.ulecdn.com/ulewap/ws/20171020/js/ule_plugin',
         'ule_wap': 'https://i1.beta.ulecdn.com/ulewap/ws/20171020/js/ule_wap',
-        'ule_extend': 'https://i1.beta.ulecdn.com/ulewap/ws/20171020/js/ule_extend',
+        // 'ule_extend': 'https://i1.beta.ulecdn.com/ulewap/ws/20171020/js/ule_extend',
         'vue': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/vue.min',
         'vue-lazyload': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/vue-lazyload'
     }
 });
 
-require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_wap', 'ule_extend'], function($, Vue, FastClick, VueLazyload) {
+require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_wap'], function($, Vue, FastClick, VueLazyload) {
     Vue.use(VueLazyload, {
         loading: 'https://i0.ulecdn.com/ulewap/i/290x290x2x.png',
         listenEvents: ['scroll']
@@ -39,14 +39,16 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
             boxMsg: '', //弹窗信息
             card: '',
             phone: '',
+            isHaveStock: 1, //是否有券库存
             // 活动API和key
             actData: {
-                keys: 'jsjinronglvka', //推荐位key 正式：event_20171017_goods
+                keys: 'jsjinronglvka', //推荐位key 正式：event_20171017_goods  测试：jsjinronglvka
                 code: 'MA_U_150785973137187', //活动code
                 api: {
                     getPrdsUrl: '//search.ule.com/api/recommend?jsoncallback=?&restype=2001', // 商品
                     queryQualification: '//prize.' + uleUrl + '/mc/jiangSuFinance/whiteListVerification', // 资格验证
-                    receivePrize: '//prize.' + uleUrl + '/mc/jiangSuFinance/whiteListVerification' // 领券
+                    receivePrize: '//prize.' + uleUrl + '/mc/jiangSuFinance/whiteListVerification', // 领券
+                    isHaveStock: '//prize.' + uleUrl + '/mc/jiangSuFinance/isHaveStock', // 券是否有库存
                 }
             },
             // 登录状态
@@ -171,8 +173,13 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
             },
             // 设置商品图片宽高
             setImg: function() {
-                this.goodsImg.w = (screen.availWidth - 8) / 2 - 6
-                this.goodsImg.h = (screen.availWidth - 8) / 2 - 6
+                if(screen.availWidth > 750){
+                    this.goodsImg.w = (750 - 8) / 2 - 6
+                    this.goodsImg.h = (750 - 8) / 2 - 6
+                }else{
+                    this.goodsImg.w = (screen.availWidth - 8) / 2 - 6
+                    this.goodsImg.h = (screen.availWidth - 8) / 2 - 6
+                }
             },
             // 商品跳转
             goodsJump: function(inStock, listingId) {
@@ -242,6 +249,29 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                     _self.loadingShow = 0
                 })
             },
+            // 查询券库存
+            checkStock: function() {
+                var _self = this
+                var data = {
+                    code: _self.actData.code
+                };
+                $.ajax({
+                    url: _self.actData.api.isHaveStock,
+                    type: 'get',
+                    async: false,
+                    data: data,
+                    dataType: 'jsonp',
+                    success: function(obj) {
+                        if(!!obj.content){
+                            // 有券库存
+                            _self.isHaveStock = 1
+                        }else{
+                            // 无库存
+                            _self.isHaveStock = 0
+                        }
+                    }
+                })
+            },
         },
         mounted: function() {
             // 1.检查登录状态，如果登录显示已登录，反之显示没有登录
@@ -252,6 +282,8 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
             }
             // 2.商品推荐位
             this.getItems()
+            // 2.1 查询券库存
+            this.checkStock()
             // 3.如果登录，则进入验证阶段，验证完成后，后端交互
 
             // 4.如果确认有领券资格，则显示领券界面，反之仍然不显示
