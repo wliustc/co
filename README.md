@@ -22,5 +22,5 @@ web/qianduan.123
 静态资源 文件路径 : /data/webroot   i/j/c
 我的静态资源地址：  https://i1.beta.ulecdn.com/ulewap/ws   /data/webroot/ulewap/ws
 
-活动主页 文件路径 : /data/wwwroot/event/2017        https://www.beta.ule.com/event/2017/1026/h5/index.html
+活动主页 文件路径 : /data/wwwroot/event/2017        https://www.beta.ule.com/event/2017/1020/h5/index.html
 ule wap 文件路径:  /data/wwwroot/ulewap

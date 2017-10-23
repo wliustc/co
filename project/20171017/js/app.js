@@ -162,6 +162,13 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
             closeBox: function() {
                 this.boxShow = 0
             },
+            // 关闭成功领取弹窗
+            closeSucBox: function() {
+                this.boxShow = 0
+                $('html, body').animate({
+                    scrollTop: $("#goods").offset().top
+                }, 500);
+            },
             // 设置商品图片宽高
             setImg: function() {
                 this.goodsImg.w = (screen.availWidth - 8) / 2 - 6
@@ -229,10 +236,11 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                     success: function(obj) {
                         // console.log(obj.jsjinronglvka)
                         _self.goodsList = obj.jsjinronglvka
-                        _self.setImg()
-                        _self.loadingShow = 0
                     }
-                });
+                }).done(function() {
+                    _self.setImg()
+                    _self.loadingShow = 0
+                })
             },
         },
         mounted: function() {

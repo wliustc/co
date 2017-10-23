@@ -64,7 +64,7 @@
             </div>
         </div>
         <!-- 兑换商品 -->
-        <div v-cloak class="goods">
+        <div v-cloak class="goods" id="goods">
             <div class="goods-title">
                 <img src="https://i1.beta.ulecdn.com/ulewap/ws/20171020/images/title_goods.png" alt="">
             </div>
@@ -120,7 +120,7 @@
                 </div>
             </div>
             <!-- 3 领取成功 -->
-            <div v-else-if="boxType == 3" @click="closeBox()" class="tip-main">
+            <div v-else-if="boxType == 3" @click="closeSucBox()" class="tip-main">
                 <img src="https://i1.beta.ulecdn.com/ulewap/ws/20171020/images/lq_success.png" alt="">
             </div>
             <!-- 4 领取失败 -->
