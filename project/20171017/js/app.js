@@ -137,26 +137,17 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                     code: _self.actData.code,
                     channel: 200000
                 }
-                $.ajax({
-                    url: _self.actData.api.receivePrize,
-                    type: 'get',
-                    cache: false,
-                    async: false,
-                    data: data,
-                    dataType: 'jsonp',
-                    jsonp: "callback",
-                    success: function(obj) {
-                        // 成功
-                        if (obj.code == '0001') {
-                            _self.boxShow = 1
-                            _self.boxType = 3
-                        }
-                        // 失败
-                        else {
-                            _self.boxShow = 1
-                            _self.boxType = 4
-                            _self.boxMsg = obj.message
-                        }
+                _self.getJson(_self.actData.api.receivePrize, data, function(obj) {
+                    // 成功
+                    if (obj.code == '0001') {
+                        _self.boxShow = 1
+                        _self.boxType = 3
+                    }
+                    // 失败
+                    else {
+                        _self.boxShow = 1
+                        _self.boxType = 4
+                        _self.boxMsg = obj.message
                     }
                 })
             },
@@ -173,10 +164,10 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
             },
             // 设置商品图片宽高
             setImg: function() {
-                if(screen.availWidth > 750){
+                if (screen.availWidth > 750) {
                     this.goodsImg.w = (750 - 8) / 2 - 6
                     this.goodsImg.h = (750 - 8) / 2 - 6
-                }else{
+                } else {
                     this.goodsImg.w = (screen.availWidth - 8) / 2 - 6
                     this.goodsImg.h = (screen.availWidth - 8) / 2 - 6
                 }
@@ -195,29 +186,35 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                     idNumber: _self.card,
                     code: _self.actData.code
                 }
-                $.ajax({
-                    url: _self.actData.api.queryQualification,
+                _self.getJson(_self.actData.api.queryQualification, data, function(obj) {
+                    // 验证通过
+                    if (obj.code == '0001') {
+                        // console.log("验证通过")
+                        _self.permissions = 1
+                        _self.boxShow = 1
+                        _self.boxType = 1
+                    }
+                    // 验证不通过
+                    else {
+                        _self.permissions = 0
+                        _self.boxShow = 1
+                        _self.boxType = 0
+                        _self.boxMsg = obj.message
+                    }
+                })
+            },
+            getJson: function(url, data, callback) {
+                return $.ajax({
+                    url: url,
                     type: 'get',
-                    cache: false,
                     async: false,
                     data: data,
                     dataType: 'jsonp',
-                    jsonp: "callback",
+                    headers: {
+                        "Accept-Encoding": "gzip,deflate"
+                    },
                     success: function(obj) {
-                        // 验证通过
-                        if (obj.code == '0001') {
-                            console.log("验证通过")
-                            _self.permissions = 1
-                            _self.boxShow = 1
-                            _self.boxType = 1
-                        }
-                        // 验证不通过
-                        else {
-                            _self.permissions = 0
-                            _self.boxShow = 1
-                            _self.boxType = 0
-                            _self.boxMsg = obj.message
-                        }
+                        callback(obj)
                     }
                 })
             },
@@ -228,22 +225,8 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                     moduleKeys: _self.actData.keys,
                     times: new Date().getTime()
                 };
-                $.ajax({
-                    url: _self.actData.api.getPrdsUrl,
-                    type: 'get',
-                    async: false,
-                    data: data,
-                    dataType: 'jsonp',
-                    jsonp: "jsonApiCallback",
-                    jsonpCallback: "jsonApiCallback",
-                    cache: true,
-                    headers: {
-                        "Accept-Encoding": "gzip,deflate"
-                    },
-                    success: function(obj) {
-                        // console.log(obj.jsjinronglvka)
-                        _self.goodsList = obj.jsjinronglvka
-                    }
+                _self.getJson(_self.actData.api.getPrdsUrl, data, function(obj) {
+                    _self.goodsList = obj.jsjinronglvka
                 }).done(function() {
                     _self.setImg()
                     _self.loadingShow = 0
@@ -255,20 +238,13 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                 var data = {
                     code: _self.actData.code
                 };
-                $.ajax({
-                    url: _self.actData.api.isHaveStock,
-                    type: 'get',
-                    async: false,
-                    data: data,
-                    dataType: 'jsonp',
-                    success: function(obj) {
-                        if(!!obj.content){
-                            // 有券库存
-                            _self.isHaveStock = 1
-                        }else{
-                            // 无库存
-                            _self.isHaveStock = 0
-                        }
+                _self.getJson(_self.actData.api.isHaveStock, data, function(obj) {
+                    if (!!obj.content) {
+                        // 有券库存
+                        _self.isHaveStock = 1
+                    } else {
+                        // 无库存
+                        _self.isHaveStock = 0
                     }
                 })
             },
