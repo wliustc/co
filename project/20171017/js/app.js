@@ -32,6 +32,7 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
     new Vue({
         el: '#app',
         data: {
+            ActStart: 1, //活动开始与否
             loadingShow: 1,
             goodsImg: {}, //商品图片宽高参数
             boxType: '', //弹窗类型1、2、3、4、5、6、7...
@@ -42,10 +43,10 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
             isHaveStock: 1, //是否有券库存
             // 活动API和key
             actData: {
-                keys: 'jsjinronglvka', //推荐位key 正式：event_20171017_goods  测试：jsjinronglvka
+                keys: 'jsjinronglvka', //推荐位key 正式：2017jinronghuidingyue 测试：jsjinronglvka
                 code: 'MA_U_150785973137187', //活动code
                 api: {
-                    getPrdsUrl: '//search.ule.com/api/recommend?jsoncallback=?&restype=2001', // 商品
+                    getPrdsUrl: '//static-content.ulecdn.com/mobilead/recommond/dwRecommond.do?restype=2001', // 商品
                     queryQualification: '//prize.' + uleUrl + '/mc/jiangSuFinance/whiteListVerification', // 资格验证
                     receivePrize: '//prize.' + uleUrl + '/mc/jiangSuFinance/whiteListVerification', // 领券
                     isHaveStock: '//prize.' + uleUrl + '/mc/jiangSuFinance/isHaveStock', // 券是否有库存
@@ -61,6 +62,20 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
         created: function() {
             // 初始化
             FastClick.attach(document.body)
+            // 时间判断活动是否开始
+            system.systemTime.load()
+            var time = system.systemTime.get()
+            if (time > Date.parse(new Date('2017-11-1 00:00:00')) && time < Date.parse(new Date('2017-11-1 10:00:00'))) {
+                this.ActStart = 0
+            } else if (time > Date.parse(new Date('2017-11-8 00:00:00')) && time < Date.parse(new Date('2017-11-8 24:00:00'))) {
+                this.ActStart = 0
+            } else if (time > Date.parse(new Date('2017-11-15 00:00:00')) && time < Date.parse(new Date('2017-11-15 24:00:00'))) {
+                this.ActStart = 0
+            } else if (time > Date.parse(new Date('2017-11-22 00:00:00')) && time < Date.parse(new Date('2017-11-22 24:00:00'))) {
+                this.ActStart = 0
+            } else {
+                this.ActStart = 1
+            }
         },
         methods: {
             getCookie: function(name) {
@@ -110,13 +125,16 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                         _self.login();
                     }, function() {});
                 } else {
+                    if (!_self.card || !_self.phone) {
+                        $.alert("未输入完整信息!", "请重新输入!");
+                    }
                     // 开始验证
-                    if (_self.validateForm()) {
+                    else if (_self.validateForm()) {
                         // 前端验证通过，开始后端验证
                         _self.yzAjax();
                     } else {
                         // 前端验证失败
-                        $.alert("您输入的信息不符合格式!", "请重新输入!");
+                        $.alert("您输入的信息有误!", "请重新输入!");
                     }
                 }
             },
@@ -193,6 +211,16 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                         _self.permissions = 1
                         _self.boxShow = 1
                         _self.boxType = 1
+                    } else if (obj.code == '1108') {
+                        _self.permissions = 0
+                        _self.boxShow = 1
+                        _self.boxType = 0
+                        _self.boxMsg = '同一邮乐用户只能领取一份礼品，请更换用户再次验证领取'
+                    } else if (obj.code == '1109') {
+                        _self.permissions = 0
+                        _self.boxShow = 1
+                        _self.boxType = 0
+                        _self.boxMsg = '该验证信息已被其他用户验证'
                     }
                     // 验证不通过
                     else {
@@ -222,11 +250,23 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
             getItems: function() {
                 var _self = this
                 var data = {
-                    moduleKeys: _self.actData.keys,
-                    times: new Date().getTime()
+                    moduleKeys: _self.actData.keys
                 };
-                _self.getJson(_self.actData.api.getPrdsUrl, data, function(obj) {
-                    _self.goodsList = obj.jsjinronglvka
+                $.ajax({
+                    url: _self.actData.api.getPrdsUrl,
+                    type: 'get',
+                    timeout: 10000,
+                    data: data,
+                    dataType: 'jsonp',
+                    jsonp: "jsonApiCallback",
+                    jsonpCallback: "jsonApiCallback3",
+                    cache: true,
+                    headers: {
+                        "Accept-Encoding": "gzip,deflate"
+                    },
+                    success: function(obj) {
+                        _self.goodsList = obj.jsjinronglvka
+                    }
                 }).done(function() {
                     _self.setImg()
                     _self.loadingShow = 0
