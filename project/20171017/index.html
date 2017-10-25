@@ -124,19 +124,22 @@
                 <img src="https://i1.beta.ulecdn.com/ulewap/ws/20171020/images/yz_error_bg.png" alt="">
                 <div class="boxTip">
                     <h1>验证失败</h1>
-                    <small>{{ boxMsg }}</small>
+                    <small style="display:block;text-align:left">{{ boxMsg }}</small>
                 </div>
             </div>
             <!-- 3 领取成功 -->
-            <div v-else-if="boxType == 3" @click="closeSucBox()" class="tip-main">
+            <div v-else-if="boxType == 3" class="tip-main" style="position:relative">
                 <img src="https://i1.beta.ulecdn.com/ulewap/ws/20171020/images/lq_success.png" alt="">
+                <div style="position:absolute;width:30%;top:0;right:0;height:20%" @click="closeBox()"></div>
+                <div style="position:absolute;width:100%;top:20%;height:60%" @click="voucherPersonCenter()"></div>
+                <div style="position:absolute;width:100%;bottom:0;height:20%" @click="closeSucBox()"></div>
             </div>
             <!-- 4 领取失败 -->
             <div v-else-if="boxType == 4" @click="closeBox()" class="tip-main">
                 <img src="https://i1.beta.ulecdn.com/ulewap/ws/20171020/images/yz_error_bg.png" alt="">
                 <div class="boxTip">
                     <h1>领取失败</h1>
-                    <small>{{ boxMsg }}</small>
+                    <small style="display:block;text-align:left">{{ boxMsg }}</small>
                 </div>
             </div>
         </div>

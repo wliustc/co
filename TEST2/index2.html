@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>手机验证</title>
+    <link href="//i2.ulecdn.com/i/favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="//i2.ulecdn.com/i/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="//i2.ulecdn.com/i/favicon.ico" rel="bookmark" type="image/x-icon" />
+    <!-- STYLESHEET START -->
+    <link rel="stylesheet" href="//i0.ulecdn.com/c/event/2017/0728/wx_ule818/style.css?v=4">
+    <!-- / STYLESHEET END -->
+</head>
+
+<body>
+
+    <div class="wrapper couponPage">
+        <section class="banner">
+            <img src="//i0.ulecdn.com/i/event/2017/0728/wx_ule818/banner_01.jpg" width="100%">
+            <img src="//i0.ulecdn.com/i/event/2017/0728/wx_ule818/banner_02.jpg" width="100%">
+            <img src="//i0.ulecdn.com/i/event/2017/0728/wx_ule818/banner_03.jpg" width="100%">
+            <img src="//i0.ulecdn.com/i/event/2017/0728/wx_ule818/banner_04.jpg" width="100%">
+        </section>
+
+        <div class="container">
+            <section class="verify">
+                <div class="verify-con">
+                    <ul>
+                        <li>
+                            <div class="leftName">手机号:</div>
+                            <input type="text" name="phoneNum" id="mobile" placeholder="" maxlength="11">
+                            <p class="error" id="mobileError">&nbsp;</p>
+                        </li>
+                        <li>
+                            <div>
+                                <div class="leftName">图片验证码:</div>
+                                <div class="verifiCodeImg">
+                                    <input type="text" name="verifiCodeImg" id="imgValidateCode" class="randcode" placeholder="" maxlength="4">
+                                    <p class="error" id="imgValidateCodeError">&nbsp;</p>
+                                </div>
+
+                                <div class="getCodeImg" id="getCodeImg">
+                                    <img src="" alt="" />
+                                    <span class="refresh">换一张图片</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="leftName">短信验证码:</div>
+                            <input type="text" name="verifiCode" id="mobileValidateCode" class="randcode" placeholder="" maxlength="6">
+                            <span id="getCode">获取验证码</span>
+                            <p class="error" id="mobileValidateCodeError">&nbsp;</p>
+                        </li>
+                    </ul>
+                    <div id="submit_btn" class="submit_btn">提交</div>
+                </div>
+            </section>
+
+            <section class="ruleBox">
+                <h3 class="ruleTitle center"><span>领券规则</span></h3>
+                <ul class="ruleUl">
+                    <li><i>1、</i>优惠券已发放至您账户，请用填写的手机号码登录/注册邮乐网账号；</li>
+                    <li><i>2、</i>每个手机号仅可领取一张优惠券，每个订单限用一张优惠券；</li>
+                    <li><i>3、</i>优惠券不可叠加使用，也不可和其他优惠同时使用；</li>
+                    <li><i>4、</i>在参与本活动过程中，如果出现违规行为（如作弊领取、恶意套现、虚假交易等），邮乐将取消您的订单，并有权撤销违规交易，收回相关优惠券，必要时追究法律责任；</li>
+                    <li><i>5、</i>本活动最终解释权归邮乐所有；</li>
+                </ul>
+            </section>
+        </div>
+
+        <!-- DIALOG BOX START-->
+        <div class="mask_bg">
+            <div class="mask"></div>
+            <div class="mask-box">
+                <p class="h2">恭喜您!</p>
+                <p class="h3">领到了一张8元无门槛抵用券!</p>
+                <p class="txt">优惠券已存入您【个人中心】-【优惠券】中啦</p>
+                <div class="sure_btn">立即用券</div>
+                <div class="close"></div>
+            </div>
+        </div>
+        <!-- / DIALOG BOX END-->
+
+    </div>
+    <!-- JAVASCRIPT START -->
+    <script src="//i0.ulecdn.com/ulewap/j/common/zepto.min.js"></script>
+    <script src="//i0.ulecdn.com/ulewap/j/common/waptrack.js"></script>
+    <script src="//i0.ulecdn.com/j/app/event/2017/0728/wx_ule818/verification.js?v=3"></script>
+    <script src="//i0.ulecdn.com/ulewap/j/common/inner_header.js"></script>
+    <!-- / JAVASCRIPT END -->
+</body>
+
+</html>

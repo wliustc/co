@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>手机验证</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="福建邮乐小店领券" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <link rel="stylesheet" href="https://i1.beta.ulecdn.com/ulewap/ws/lib/css/weui.min.css">
+    <link rel="stylesheet" href="https://i1.beta.ulecdn.com/ulewap/ws/lib/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="./css/base.css">
+</head>
+
+<body>
+    <div id="app" style="background-color:#3b18ba">
+        <!-- <div class="fly-loadme">
+            <div class="fly-loadme-ios">
+            </div>
+            <div class="fly-loadme-text">数据加载中</div>
+        </div> -->
+        <div class="head">
+            <img style="display:block" src="./images/head.jpg" alt="">
+        </div>
+        <div class="main">
+            <div class="weui-flex" style="align-items:center">
+                <div class="main-title">
+                    手机号：
+                </div>
+                <div class="weui-cell" style="background-color:#ffffff">
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" v-model.trim="form.phone" v-on:keyup="phoneCheck()">
+                    </div>
+                </div>
+            </div>
+            <div v-cloak class="weui-cells__tips" style="text-align:left;padding-left:90px;padding-right:0;color:#fd5453">
+                {{ tip.phoneTip }}
+            </div>
+            <div class="weui-flex fly-m-t" style="align-items:center">
+                <div class="main-title">
+                    短信验证码：
+                </div>
+                <div class="weui-cell" style="background-color:#ffffff">
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" v-model.trim="form.vcode" v-on:keyup="vcodeCheck()">
+                    </div>
+                </div>
+                <div class="main-footer weui-flex__item">
+                    <button style="color:#ffffff;background-color:orange;border:0;display:block;height:100%;width:100%">获取验证码</button>
+                </div>
+            </div>
+            <div v-cloak class="weui-cells__tips" style="text-align:left;padding-left:90px;padding-right:0;color:#fd5453">
+                {{ tip.vcodeTip }}
+            </div>
+            <div class="weui-flex fly-m-t" style="align-items:center">
+                <div class="main-title">
+                    图片验证码：
+                </div>
+                <div class="weui-cell" style="background-color:#ffffff">
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" v-model.trim="form.pic" v-on:keyup="picCheck()">
+                    </div>
+                </div>
+                <div class="main-footer weui-flex__item">
+                    <img style="border:0;display:block;height:100%;width:100%" src="https://i1.beta.ulecdn.com/ulewap/ws/20171020/images/head.png" alt="">
+                </div>
+            </div>
+            <div v-cloak class="weui-cells__tips" style="text-align:left;padding-left:90px;padding-right:0;color:#fd5453">
+                {{ tip.picTip }}
+            </div>
+
+            <div class="main-submit">
+                <a @click="sub()" href="javascript:;" style="width:70%;border-radius:0;background-color:#fd5453" class="weui-btn weui-btn_warn">提交</a>
+            </div>
+        </div>
+        <div class="foot">
+            <img style="display:block" src="./images/foot.jpg" alt="">
+        </div>
+        <div class="des">
+            <p>1、邮乐小店福建用户专享福利，请填写邮乐小店的注册手机号，优惠券会发放至账户； </p>
+            <p>2、每个手机号仅可领取一张优惠券，每个订单限用一张优惠券；</p>
+            <p>3、优惠券仅限用于购买“安徽砀山酥梨”使用不可叠加使用，也不可与其他优惠同时使用；</p>
+            <p>4、本活动最终解释权归邮乐所有。</p>
+        </div>
+    </div>
+
+</body>
+
+<script type="text/javascript" src="https://i1.beta.ulecdn.com/ulewap/ws/lib/js/require.min.js" data-main="./js/app.js" async="true"></script>
+
+</html>

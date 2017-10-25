@@ -43,12 +43,12 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
             isHaveStock: 1, //是否有券库存
             // 活动API和key
             actData: {
-                keys: 'jsjinronglvka', //推荐位key 正式：2017jinronghuidingyue 测试：jsjinronglvka
+                keys: '2017jinronghuidingyue', //推荐位key 正式：2017jinronghuidingyue 测试：jsjinronglvka
                 code: 'MA_U_150785973137187', //活动code
                 api: {
                     getPrdsUrl: '//static-content.ulecdn.com/mobilead/recommond/dwRecommond.do?restype=2001', // 商品
                     queryQualification: '//prize.' + uleUrl + '/mc/jiangSuFinance/whiteListVerification', // 资格验证
-                    receivePrize: '//prize.' + uleUrl + '/mc/jiangSuFinance/whiteListVerification', // 领券
+                    receivePrize: '//prize.' + uleUrl + '/mc/jiangSuFinance/receivePrize', // 领券
                     isHaveStock: '//prize.' + uleUrl + '/mc/jiangSuFinance/isHaveStock', // 券是否有库存
                 }
             },
@@ -146,6 +146,21 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                     scrollTop: $("#tickets").offset().top
                 }, 500);
             },
+            // 查看券跳个人中心
+            voucherPersonCenter: function() {
+                if ($.browser.ule) {
+                    //邮乐app
+                    location.href = 'uleMobile://coupon/list';
+                } else {
+                    if (this.getCookie('client_type') == 'wx_psbc') {
+                        //邮储
+                        location.href = 'https://m.' + uleUrl + '/coupon/list';
+                    } else {
+                        //邮乐
+                        location.href = 'https://m.' + uleUrl + '/coupon/list';
+                    }
+                }
+            },
             // 领券
             voucher: function() {
                 var _self = this
@@ -157,9 +172,13 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                 }
                 _self.getJson(_self.actData.api.receivePrize, data, function(obj) {
                     // 成功
-                    if (obj.code == '0001') {
+                    if (obj.code == '0000') {
                         _self.boxShow = 1
                         _self.boxType = 3
+                    } else if (obj.code == '1105') {
+                        _self.boxShow = 1
+                        _self.boxType = 4
+                        _self.boxMsg = '本周您已经领取过礼品，感谢您的关注。如未收到优惠券，请致电4008011185'
                     }
                     // 失败
                     else {
@@ -265,7 +284,9 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                         "Accept-Encoding": "gzip,deflate"
                     },
                     success: function(obj) {
-                        _self.goodsList = obj.jsjinronglvka
+                        for (i in obj) {
+                            _self.goodsList = obj[i]
+                        }
                     }
                 }).done(function() {
                     _self.setImg()
