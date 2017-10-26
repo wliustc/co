@@ -1,0 +1,274 @@
+.fly-loadme {
+    background: rgba(0, 0, 0, .7);
+    position: fixed;
+    z-index: 99;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 5px;
+    padding: 20px
+}
+
+.fly-loadme .fly-loadme-text {
+    display: block;
+    color: #fff;
+    text-align: center;
+    padding: 10px 5px 0;
+    font-size: 14px
+}
+
+.fly-loadme .fly-loadme-circular,
+.fly-loadme .fly-loadme-circular:after {
+    border-radius: 50%;
+    width: 10em;
+    height: 10em
+}
+
+.fly-loadme .fly-loadme-circular,
+.fly-loadme .fly-loadme-cube-grid,
+.fly-loadme .fly-loadme-ios,
+.fly-loadme .fly-loadme-rotateplane {
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 100
+}
+
+.fly-loadme .fly-loadme-circular {
+    font-size: 10px;
+    text-indent: -9999em;
+    border-top: 1px solid rgba(237, 237, 237, .8);
+    border-right: 1px solid rgba(237, 237, 237, .8);
+    border-bottom: 1px solid rgba(237, 237, 237, .8);
+    border-left: 1px solid #fff;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: fly-loadme-circular-animate 1.1s infinite linear;
+    animation: fly-loadme-circular-animate 1.1s infinite linear
+}
+
+@-webkit-keyframes fly-loadme-circular-animate {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0)
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes fly-loadme-circular-animate {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0)
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}
+
+.fly-loadme .fly-loadme-ios {
+    font-size: 10px;
+    -webkit-animation: fly-loadme-ios-animate 1s steps(12) infinite;
+    animation: fly-loadme-ios-animate 1s steps(12) infinite;
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgxMDB2MTAwSDB6Ii8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTlFOUU5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgLTMwKSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iIzk4OTY5NyIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgzMCAxMDUuOTggNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjOUI5OTlBIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDYwIDc1Ljk4IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0EzQTFBMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCA2NSA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNBQkE5QUEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoMTIwIDU4LjY2IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0IyQjJCMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgxNTAgNTQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjQkFCOEI5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDE4MCA1MCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDMkMwQzEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTE1MCA0NS45OCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDQkNCQ0IiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTEyMCA0MS4zNCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNEMkQyRDIiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDM1IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0RBREFEQSIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgtNjAgMjQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTJFMkUyIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKC0zMCAtNS45OCA2NSkiLz48L3N2Zz4=) no-repeat;
+    background-size: 100%
+}
+
+@-webkit-keyframes fly-loadme-ios-animate {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0)
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes fly-loadme-ios-animate {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0)
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}
+
+.fly-loadme .fly-loadme-rotateplane {
+    background-color: #fff;
+    -webkit-animation: fly-loadme-rotateplane-animate 1.2s infinite ease-in-out;
+    animation: fly-loadme-rotateplane-animate 1.2s infinite ease-in-out
+}
+
+@-webkit-keyframes fly-loadme-rotateplane-animate {
+    0% {
+        -webkit-transform: perspective(120px) rotateX(0) rotateY(0);
+        transform: perspective(120px) rotateX(0) rotateY(0)
+    }
+    50% {
+        -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0);
+        transform: perspective(120px) rotateX(-180.1deg) rotateY(0)
+    }
+    100% {
+        -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg)
+    }
+}
+
+@keyframes fly-loadme-rotateplane-animate {
+    0% {
+        -webkit-transform: perspective(120px) rotateX(0) rotateY(0);
+        transform: perspective(120px) rotateX(0) rotateY(0)
+    }
+    50% {
+        -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0);
+        transform: perspective(120px) rotateX(-180.1deg) rotateY(0)
+    }
+    100% {
+        -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg)
+    }
+}
+
+.fly-loadme .fly-loadme-cube-grid .fly-loadme-cubeGrid {
+    width: 33%;
+    height: 33%;
+    background-color: #fff;
+    float: left;
+    -webkit-animation: fly-loadme-cubeGrid-animate 1.3s infinite ease-in-out;
+    animation: fly-loadme-cubeGrid-animate 1.3s infinite ease-in-out
+}
+
+.fly-loadme .fly-loadme-cube-grid .fly-loadme-cubeGrid1 {
+    -webkit-animation-delay: .2s;
+    animation-delay: .2s
+}
+
+.fly-loadme .fly-loadme-cube-grid .fly-loadme-cubeGrid2 {
+    -webkit-animation-delay: .3s;
+    animation-delay: .3s
+}
+
+.fly-loadme .fly-loadme-cube-grid .fly-loadme-cubeGrid3 {
+    -webkit-animation-delay: .4s;
+    animation-delay: .4s
+}
+
+.fly-loadme .fly-loadme-cube-grid .fly-loadme-cubeGrid4 {
+    -webkit-animation-delay: .1s;
+    animation-delay: .1s
+}
+
+.fly-loadme .fly-loadme-cube-grid .fly-loadme-cubeGrid5 {
+    -webkit-animation-delay: .2s;
+    animation-delay: .2s
+}
+
+.fly-loadme .fly-loadme-cube-grid .fly-loadme-cubeGrid6 {
+    -webkit-animation-delay: .3s;
+    animation-delay: .3s
+}
+
+.fly-loadme .fly-loadme-cube-grid .fly-loadme-cubeGrid7 {
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s
+}
+
+.fly-loadme .fly-loadme-cube-grid .fly-loadme-cubeGrid8 {
+    -webkit-animation-delay: .1s;
+    animation-delay: .1s
+}
+
+.fly-loadme .fly-loadme-cube-grid .fly-loadme-cubeGrid9 {
+    -webkit-animation-delay: .2s;
+    animation-delay: .2s
+}
+
+@-webkit-keyframes fly-loadme-cubeGrid-animate {
+    0%,
+    100%,
+    70% {
+        -webkit-transform: scale3D(1, 1, 1);
+        transform: scale3D(1, 1, 1)
+    }
+    35% {
+        -webkit-transform: scale3D(0, 0, 1);
+        transform: scale3D(0, 0, 1)
+    }
+}
+
+@keyframes fly-loadme-cubeGrid-animate {
+    0%,
+    100%,
+    70% {
+        -webkit-transform: scale3D(1, 1, 1);
+        transform: scale3D(1, 1, 1)
+    }
+    35% {
+        -webkit-transform: scale3D(0, 0, 1);
+        transform: scale3D(0, 0, 1)
+    }
+}
+
+.fly-loadme .fly-loadme-bounced {
+    width: 70px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 100
+}
+
+.fly-loadme .fly-loadme-bounced .fly-loadme-bounced-child {
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: fly-loadme-bouncedelay-animate 1.4s infinite ease-in-out both;
+    animation: fly-loadme-bouncedelay-animate 1.4s infinite ease-in-out both
+}
+
+.fly-loadme .fly-loadme-bounced .fly-loadme-bounced1 {
+    -webkit-animation-delay: -.32s;
+    animation-delay: -.32s
+}
+
+.fly-loadme .fly-loadme-bounced .fly-loadme-bounced2 {
+    -webkit-animation-delay: -.16s;
+    animation-delay: -.16s
+}
+
+@-webkit-keyframes fly-loadme-bouncedelay-animate {
+    0%,
+    100%,
+    80% {
+        -webkit-transform: scale(0);
+        transform: scale(0)
+    }
+    40% {
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@keyframes fly-loadme-bouncedelay-animate {
+    0%,
+    100%,
+    80% {
+        -webkit-transform: scale(0);
+        transform: scale(0)
+    }
+    40% {
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
+}

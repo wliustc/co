@@ -297,7 +297,8 @@
             }
 
         },
-        getImgCode: function() { //获取图片验证码；
+        //获取图片验证码接口数据函数
+        getImgCode: function() { 
             var m = this;
             $.ajax({
                 type: "get",
@@ -323,6 +324,7 @@
                 }
             });
         },
+        // 获取短信验证码接口数据函数
         verifyImgCode: function() {
             var m = this;
             var mobile = $("#mobile").val();
@@ -331,10 +333,10 @@
             $.ajax({
                 type: "get",
                 data: {
-                    activityCode: code,
-                    mobile: mobile,
-                    picRandomCode: picRandomCode,
-                    key: m.key
+                    activityCode: code, //活动CODE
+                    mobile: mobile,//手机号
+                    picRandomCode: picRandomCode,//图形验证码
+                    key: m.key  //图形验证码返回的key
                 },
                 url: "//prize.ule.com/mc/mobileReceiveCoupons/validateCode",
                 dataType: "jsonp",
@@ -375,7 +377,8 @@
                 }
             });
         },
-        verifyMobileCode: function() { //获取短信验证码；
+        //最终提交
+        verifyMobileCode: function() { 
             var m = this;
             var mobile = $("#mobile").val();
             var picRandomCode = $("#imgValidateCode").val();
@@ -384,9 +387,9 @@
             $.ajax({
                 type: "get",
                 data: {
-                    activityCode: code,
-                    mobile: mobile,
-                    smsRandomCode: smsRandomCode
+                    activityCode: code, //活动code
+                    mobile: mobile, //手机号
+                    smsRandomCode: smsRandomCode //用户填写的短信验证码
                 },
                 url: "//prize.ule.com/mc/mobileReceiveCoupons/receiveCoupons",
                 dataType: "jsonp",
@@ -434,6 +437,7 @@
                     $(this).val(value);
                 }
             })
+            // 获取手机验证码
             $("#getCode").click(function() {
                 m.validatePhoneCode();
                 var imgValidateCodeError = $("#imgValidateCodeError").html();
@@ -442,6 +446,7 @@
                     m.verifyImgCode();
                 }
             })
+            // 获取图形验证码
             $("#getCodeImg").click(function() {
                 m.validatePhoneCode();
                 var mobileError = $("#mobileError").html();
@@ -468,6 +473,7 @@
                 $(".mask_bg").hide();
             })
         },
+        // 手机号验证
         validatePhoneCode: function() {
             var name = $('#mobile').val().trimAll();
             if (name == "") {
@@ -477,6 +483,7 @@
             } else
                 $('#mobileError').html("&nbsp");
         },
+        // 短信验证码验证
         mobileValidateCode: function() {
             var name = $('#mobileValidateCode').val().trimAll();
             if (name == "") {
@@ -484,6 +491,7 @@
             } else
                 $('#mobileValidateCodeError').html("&nbsp");
         },
+        // 图形验证码验证
         imgValidateCode: function() {
             var name = $('#imgValidateCode').val().trimAll();
             if (name == "") {
