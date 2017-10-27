@@ -12,7 +12,7 @@
     <meta name="format-detection" content="email=no" />
     <link rel="stylesheet" href="https://i1.beta.ulecdn.com/ulewap/ws/lib/css/weui.min.css">
     <link rel="stylesheet" href="https://i1.beta.ulecdn.com/ulewap/ws/lib/css/jquery-weui.min.css">
-    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/base.min.css">
 </head>
 
 <body>
@@ -26,6 +26,7 @@
             <img style="display:block" src="./images/head.jpg" alt="">
         </div>
         <div v-cloak class="main">
+            <div class="main-bg"></div>
             <div class="weui-flex" style="align-items:center">
                 <div class="main-title">
                     手机号：
@@ -89,6 +90,25 @@
             <p>4、在参与本活动过程中，如果出现违规行为（如作弊领取、恶意套现、虚假交易等），邮乐将取消您的订单，并有权撤销违规交易，收回相关优惠券，必要时追究法律责任；</p>
             <p>5、活动时间：2017年11月1日-2017年11月10日；</p>
             <p>6、邮乐在法律范围内拥有解释权。</p>
+        </div>
+        <!-- 弹窗 -->
+        <div v-cloak v-show="boxShow == 1" class="tip-box">
+            <!-- 1 验证成功 -->
+            <div v-if="boxType == 1" class="tip-main">
+                <div class="boxImg">
+                    <img src="./images/alert_success.png" alt="">
+                    <div class="closeBox"></div>
+                    <div class="jumpBox"></div>
+                </div>
+            </div>
+            <!-- 已经领取过了 -->
+            <div v-else class="tip-main">
+                <div class="boxImg">
+                    <img src="./images/alert_has.png" alt="">
+                    <div @click="closeBox()" class="closeBox"></div>
+                    <div @click="checkP()" class="jumpBox"></div>
+                </div>
+            </div>
         </div>
     </div>
 

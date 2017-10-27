@@ -30,7 +30,9 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
     new Vue({
         el: '#app',
         data: {
-            isGetCode: 1, //是够可以点击获取验证码
+            isGetCode: 1, //是否可以点击获取验证码
+            boxShow: 0, //弹窗是否显示
+            boxType: 0, //弹窗类型
             loadShow: 1,
             env: 'development', //production
             picKey: '',
@@ -64,6 +66,25 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
             this.apiData.api.sub = this.env == 'development' ? "//prize.ule.com/mc/mobileReceiveCoupons/receiveCoupons" : "//prize." + uleUrl + "/mc/mobileReceiveCoupons/receiveCoupons"
         },
         methods: {
+            // 关闭弹窗
+            closeBox: function() {
+                this.boxShow = 0;
+            },
+            // 查看券
+            checkP: function() {
+                if ($.browser.ule) {
+                    //邮乐app
+                    location.href = 'uleMobile://coupon/list';
+                } else {
+                    if (this.getCookie('client_type') == 'wx_psbc') {
+                        //邮储
+                        location.href = 'https://m.' + uleUrl + '/coupon/list';
+                    } else {
+                        //邮乐
+                        location.href = 'https://m.' + uleUrl + '/coupon/list';
+                    }
+                }
+            },
             getCookie: function(name) {
                 var cookies = document.cookie.split(";");
                 for (var i = 0, len = cookies.length; i < len; i++) {
@@ -156,7 +177,8 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
             // 获取手机验证码
             getVcode() {
                 var _self = this
-                var maxtime = 60
+                _self.loadShow = 1;
+                var maxtime = 60;
                 if (_self.phoneCheck() && _self.picCheck()) {
                     $.ajax({
                         type: "get",
@@ -170,23 +192,24 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                         dataType: "jsonp",
                         jsonp: "callback",
                         success: function(data) {
+                            _self.loadShow = 0;
                             if (data.code == "0000") {
                                 // 获取成功
                                 if (data.content) {
                                     timer = setInterval(function() {
                                         if (maxtime >= 0) {
                                             _self.isGetCode = 0;
-                                            _self.vCodeBtnContent = maxtime + "s";
+                                            _self.vCodeBtnContent = maxtime + "s重新获取";
                                             --maxtime;
                                         } else {
                                             clearInterval(timer);
                                             _self.isGetCode = 1;
-                                            _self.vCodeBtnContent = "重新获取";
+                                            _self.vCodeBtnContent = "获取验证码";
                                             maxtime = 60;
                                         }
                                     }, 1000);
                                 } else {
-                                    _self.tip.vcodeTip = "图片验证码错误"
+                                    _self.tip.vcodeTip = "请重新获取图片验证码"
                                 }
                             } else if (data.code == "1002") {
                                 $.toast("手机号格式错误", "text");
@@ -223,6 +246,7 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
             },
             // 表单提交
             sub: function() {
+                var _self = this
                 if (_self.phoneCheck() && _self.picCheck() && _self.vcodeCheck()) {
                     $.ajax({
                         type: "get",
@@ -236,26 +260,25 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                         jsonp: "callback",
                         success: function(data) {
                             if (data.code == "0000") {
-                                // $(".mask-box .txt").html("领取成功！");
-                                $(".mask_bg").show();
+                                // $.toast("领取成功！", "text");
+                                _self.boxShow = 1;
+                                _self.boxType = 1;
                             } else if (data.code == "0001") {
-                                $("#mobileValidateCode").val("");
-                                $("#mobileValidateCodeError").html("验证码错误");
-                                $(".mask_bg").hide();
+                                _self.form.vcode = ''
+                                _self.form.phone = ''
+                                _self.form.pic = ''
+                                $.toast("验证码错误", "text");
                             } else if (data.code == "1002") {
-                                $("#mobile").val("");
-                                $("#mobileError").html("手机号格式错误");
-                                $(".mask_bg").hide();
+                                _self.form.vcode = ''
+                                _self.form.phone = ''
+                                _self.form.pic = ''
+                                $.toast("手机号格式错误", "text");
                             } else if (data.code == "1001") {
-                                $('.mask-box .h2').hide();
-                                $(".mask-box .h3").html("哎呀，每人限领一个福利，别贪心哦(*^_^*) ");
-                                $(".mask_bg").show();
+                                // $.toast("哎呀，每人限领一个福利，别贪心哦(*^_^*)", "text");
+                                _self.boxShow = 1;
+                                _self.boxType = 2;
                             } else if (data.code == "7000" || data.code == "1006") {
-                                $('.mask-box .h2').html('领光啦');
-                                $(".mask-box .h3").html("请明天再来看看吧");
-                                $(".mask-box .txt").html("点击下方【邮乐818】去主会场看看!")
-                                $(".sure_btn").html("邮乐818");
-                                $(".mask_bg").show();
+                                $.toast("领光啦，请明天再来看看吧", "text");
                             } else {
                                 $.toast(data.message, "text");
                             }
