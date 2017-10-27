@@ -24,3 +24,12 @@ web/qianduan.123
 
 活动主页 文件路径 : /data/wwwroot/event/2017        https://www.beta.ule.com/event/2017/1020/h5/index.html
 ule wap 文件路径:  /data/wwwroot/ulewap
+
+3. 清理缓存
+网址：http://portal.baishancloud.com/stat/main/gate
+账号密码：ule_wd/Wd20161117
+
+4. 正式机
+资源lib路径  
+
+

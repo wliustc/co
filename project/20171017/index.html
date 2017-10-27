@@ -10,9 +10,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no" />
     <meta name="format-detection" content="email=no" />
-    <link rel="stylesheet" href="https://i1.beta.ulecdn.com/ulewap/ws/lib/css/weui.min.css">
-    <link rel="stylesheet" href="https://i1.beta.ulecdn.com/ulewap/ws/lib/css/jquery-weui.min.css">
-    <link rel="stylesheet" href="https://i1.beta.ulecdn.com/ulewap/ws/20171020/css/base.min.css">
+    <link rel="stylesheet" href="./lib/css/weui.min.css">
+    <link rel="stylesheet" href="./lib/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="./css/base.min.css">
 </head>
 
 <body>
@@ -23,7 +23,7 @@
             <div class="fly-loadme-text">数据加载中</div>
         </div>
         <div class="head">
-            <img style="display:block" src="https://i1.beta.ulecdn.com/ulewap/ws/20171020/images/head.png" alt="">
+            <img style="display:block" src="./images/head.jpg" alt="">
         </div>
 
         <div v-cloak class="login-block" v-show="permissions == 0">
@@ -62,17 +62,17 @@
         <div v-cloak v-if="loginState == 1 && permissions == 1">
             <!-- 领券 -->
             <div v-if="isHaveStock == 1" id="tickets" class="tickets fly-m-t">
-                <img style="display:block" src="https://i1.beta.ulecdn.com/ulewap/ws/20171020/images/done.png" alt="">
+                <img style="display:block" src="./images/done.png" alt="">
                 <button class="tickets-hot" @click="voucher()"></button>
             </div>
             <div v-else id="tickets" class="tickets fly-m-t">
-                <img style="display:block" src="https://i1.beta.ulecdn.com/ulewap/ws/20171020/images/over.png" alt="">
+                <img style="display:block" src="./images/over.png" alt="">
             </div>
         </div>
         <!-- 兑换商品 -->
         <div v-cloak class="goods" id="goods">
             <div class="goods-title">
-                <img src="https://i1.beta.ulecdn.com/ulewap/ws/20171020/images/title_goods.png" alt="">
+                <img src="./images/title_goods.png" alt="">
             </div>
             <div class="goods-content">
                 <div v-for="item in goodsList" class="goods-block" @click="goodsJump(item.inStock,item.listingId)">
@@ -96,7 +96,7 @@
         <!-- 活动规则 -->
         <div class="rules">
             <div class="rules-title">
-                <img src="https://i1.beta.ulecdn.com/ulewap/ws/20171020/images/title_rules.png" alt="">
+                <img src="./images/title_rules.png" alt="">
             </div>
             <div class="rules-content">
                 <p>1、活动时间：2017年11月。 </p>
@@ -117,11 +117,11 @@
         <div v-cloak v-show="boxShow == 1" class="tip-box">
             <!-- 1 验证成功 -->
             <div v-if="boxType == 1" @click="voucherJump()" class="tip-main">
-                <img src="https://i1.beta.ulecdn.com/ulewap/ws/20171020/images/yz_success.png" alt="">
+                <img src="./images/yz_success.png" alt="">
             </div>
             <!-- 0 验证失败 -->
             <div v-else-if="boxType == 0" @click="closeBox()" class="tip-main">
-                <img src="https://i1.beta.ulecdn.com/ulewap/ws/20171020/images/yz_error_bg.png" alt="">
+                <img src="./images/yz_error_bg.png" alt="">
                 <div class="boxTip">
                     <h1>验证失败</h1>
                     <small style="display:block;text-align:left">{{ boxMsg }}</small>
@@ -129,14 +129,14 @@
             </div>
             <!-- 3 领取成功 -->
             <div v-else-if="boxType == 3" class="tip-main" style="position:relative">
-                <img src="https://i1.beta.ulecdn.com/ulewap/ws/20171020/images/lq_success.png" alt="">
+                <img src="./images/lq_success.png" alt="">
                 <div style="position:absolute;width:30%;top:0;right:0;height:20%" @click="closeBox()"></div>
                 <div style="position:absolute;width:100%;top:20%;height:60%" @click="voucherPersonCenter()"></div>
                 <div style="position:absolute;width:100%;bottom:0;height:20%" @click="closeSucBox()"></div>
             </div>
             <!-- 4 领取失败 -->
             <div v-else-if="boxType == 4" @click="closeBox()" class="tip-main">
-                <img src="https://i1.beta.ulecdn.com/ulewap/ws/20171020/images/yz_error_bg.png" alt="">
+                <img src="./images/yz_error_bg.png" alt="">
                 <div class="boxTip">
                     <h1>领取失败</h1>
                     <small style="display:block;text-align:left">{{ boxMsg }}</small>
@@ -147,6 +147,6 @@
 
 </body>
 
-<script type="text/javascript" src="https://i1.beta.ulecdn.com/ulewap/ws/lib/js/require.min.js" data-main="https://i1.beta.ulecdn.com/ulewap/ws/20171020/js/app.js" async="true"></script>
+<script type="text/javascript" src="./lib/js/require.min.js" data-main="./js/app.js" async="true"></script>
 
 </html>
