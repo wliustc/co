@@ -199,8 +199,7 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
             },
             // 获取图形验证码
             getPic: function() {
-                var _self = this;
-                _self.loadShow = 1;
+                var _self = this
                 $.ajax({
                     type: "get",
                     data: {
@@ -212,7 +211,7 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                     success: function(data) {
                         if (data.code == "0000") {
                             _self.picKey = data.content.key;
-                            _self.picUrl = 'http://' + data.content.imageURL;
+                            _self.picUrl = 'http://'+data.content.imageURL;
                         } else {
                             $.toast(data.message, "text");
                         }

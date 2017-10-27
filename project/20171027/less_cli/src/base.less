@@ -1,0 +1,66 @@
+@import "./less/loadme.less";
+@import "./less/variables.less";
+@import "./less/mixins.less";
+@import "./less/fly.less";
+// base
+body {
+    max-width: 750px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.head,
+.foot {
+    width: 750px;
+    width: 100%;
+    img {
+        width: 100%;
+        height: auto
+    }
+}
+
+.main {
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    background: url(../images/main_bg.png);
+    background-size: 100% 100%;
+    position: relative;
+    top: -70px;
+    padding: 80px 50px 30px 50px;
+    .main-title {
+        width: 90px;
+        text-align: right
+    }
+    .main-footer {
+        padding: 0 0 0 10px;
+        height: 42px;
+    }
+    .main-submit{
+        margin-top: 40px;
+        text-align: center
+    }
+    .weui-cell {
+        flex: 1;
+        position: static
+    }
+}
+
+.des {
+    padding: 0 30px 20px 30px;
+    color: #ffffff
+}
+
+// weui extend
+.weui-btn:after {
+    border: 0
+}
+
+// vue style
+[v-cloak] {
+    display: none;
+}
+
+img[lazy=loaded] {
+    animation: fadeIn ease 1s forwards;
+}
