@@ -7,14 +7,14 @@ requirejs.config({
         "vue-lazyload": ["vue"],
     },
     paths: {
-        'jquery': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/jquery.min',
-        'jw': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/jw/jquery-weui.min',
-        'fastclick': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/fastclick.min',
-        'ule_plugin': 'https://i1.beta.ulecdn.com/ulewap/ws/20171020/js/ule_plugin',
-        'ule_wap': 'https://i1.beta.ulecdn.com/ulewap/ws/20171020/js/ule_wap',
+        'jquery': 'https://i1.ulecdn.com/ulewap/lib/js/jquery.min',
+        'jw': 'https://i1.ulecdn.com/ulewap/lib/js/jw/jquery-weui.min',
+        'fastclick': 'https://i1.ulecdn.com/ulewap/lib/js/fastclick.min',
+        'ule_plugin': '../js/ule_plugin',
+        'ule_wap': '../js/ule_wap',
         // 'ule_extend': 'https://i1.beta.ulecdn.com/ulewap/ws/20171020/js/ule_extend',
-        'vue': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/vue.min',
-        'vue-lazyload': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/vue-lazyload'
+        'vue': 'https://i1.ulecdn.com/ulewap/lib/js/vue.min',
+        'vue-lazyload': 'https://i1.ulecdn.com/ulewap/lib/js/vue-lazyload'
     }
 });
 
@@ -44,7 +44,7 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
             // 活动API和key
             actData: {
                 keys: '2017jinronghuidingyue', //推荐位key 正式：2017jinronghuidingyue 测试：jsjinronglvka
-                code: 'MA_U_150785973137187', //活动code
+                code: 'MA_U_150892613555028', //活动code
                 api: {
                     getPrdsUrl: '//static-content.ulecdn.com/mobilead/recommond/dwRecommond.do?restype=2001', // 商品
                     queryQualification: '//prize.' + uleUrl + '/mc/jiangSuFinance/whiteListVerification', // 资格验证
@@ -65,7 +65,9 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
             // 时间判断活动是否开始
             system.systemTime.load()
             var time = system.systemTime.get()
-            if (time > Date.parse(new Date('2017-11-1 00:00:00')) && time < Date.parse(new Date('2017-11-1 10:00:00'))) {
+            if (time > Date.parse(new Date('2017-10-29 00:00:00')) && time < Date.parse(new Date('2017-10-29 10:00:00'))) {
+                this.ActStart = 0
+            } else if (time > Date.parse(new Date('2017-11-1 00:00:00')) && time < Date.parse(new Date('2017-11-1 10:00:00'))) {
                 this.ActStart = 0
             } else if (time > Date.parse(new Date('2017-11-8 00:00:00')) && time < Date.parse(new Date('2017-11-8 24:00:00'))) {
                 this.ActStart = 0

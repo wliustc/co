@@ -30,6 +30,10 @@ ule wap 文件路径:  /data/wwwroot/ulewap
 账号密码：ule_wd/Wd20161117
 
 4. 正式机
-资源lib路径  
+资源lib路径(邮乐资源服务器):    /ulewap/lib/
+http://i1.ulecdn.com/ulewap/lib
+
+主页：
+
 
 

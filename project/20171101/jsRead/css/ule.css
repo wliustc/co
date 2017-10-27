@@ -1,0 +1,578 @@
+.clearfix:after,
+.clearfix:before {
+    content: " ";
+    display: block;
+    height: 0;
+    visibility: hidden
+}
+
+.clearfix:after {
+    clear: both
+}
+
+.clearfix {
+    zoom: 1
+}
+
+.clear:after,
+.clear:before {
+    content: " ";
+    display: block;
+    height: 0;
+    visibility: hidden
+}
+
+.clear:after {
+    clear: both
+}
+
+.clear {
+    zoom: 1
+}
+
+.fixed {
+    position: fixed;
+    top: 0;
+    z-index: 10
+}
+
+.hide {
+    display: none
+}
+
+.center {
+    text-align: center
+}
+
+#load {
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+    background: #000 url(http://i1.ulecdn.com/i/event/2016/0108/loading.gif) no-repeat scroll center center;
+    position: fixed;
+    left: 50%;
+    z-index: 888;
+    top: 40%;
+    background-size: 40px;
+    margin-left: -30px;
+    display: none
+}
+
+.title {
+    max-width: 640px;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin: 0;
+    padding: 0;
+    background: #f52626
+}
+
+.title .back {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    left: 15px;
+    top: 12px;
+    border-top: 2px solid #FFF;
+    border-left: 2px solid #FFF;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg)
+}
+
+.title .shareBtn {
+    position: absolute;
+    height: 22px;
+    width: 25px;
+    right: 10px;
+    top: 8px;
+    background: url(http://i1.ulecdn.com/i/event/2017/0515/festival/share.png) no-repeat;
+    background-size: 100% 100%
+}
+
+.title p {
+    width: 70%;
+    margin: 0 auto;
+    height: 40px;
+    line-height: 40px;
+    font-family: "microsoft yahei";
+    color: #FFF;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+.talk_area {
+    height: 140px;
+    background: url(http://i1.ulecdn.com/i/event/2017/0515/festival/bg_01.jpg) no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+    padding: 10px 0
+}
+
+.fixed {
+    position: fixed;
+    top: 0;
+    z-index: 10
+}
+
+.wrapUl li a {
+    display: block
+}
+
+@media screen and (min-width:360px) {
+    .container .item .price .minPrice {
+        display: inline-block
+    }
+}
+
+@media screen and (min-width:410px) {
+    .container .item .buy_btn {
+        height: 40px;
+        line-height: 40px
+    }
+}
+
+@media screen and (min-width:600px) {
+    .container .item .buy_btn {
+        height: 50px;
+        line-height: 50px;
+        font-size: 22px
+    }
+}
+
+
+/* seckill module start */
+
+.ms_icon {
+    width: 44px;
+    height: 42px;
+    position: absolute;
+    right: 8px;
+    top: 0;
+    background-image: -webkit-linear-gradient(top, #ffaf20, #ff6504);
+    background-image: linear-gradient(top, #ffaf20, #ff6504);
+    color: #FFF;
+    text-align: center;
+    font-size: 15px;
+    font-style: normal;
+    line-height: 37px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    z-index: 2;
+}
+
+.timeP {
+    width: 100%;
+    padding-bottom: 6px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    line-height: 32px;
+    /* background-image: url(http://i1.ulecdn.com/i/event/2017/0828/postal/fc/timeP_bg.jpg); */
+    background-color: rgb(57, 193, 237);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.timeP label i {
+    width: 22px;
+    height: 22px;
+    background: #fff;
+    border-radius: 3px;
+    color: #393939;
+    padding: 2px 4px;
+    margin: 0px 1px;
+    font-style: normal;
+    letter-spacing: normal;
+}
+
+.timeDesc {
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
+    color: #fff;
+    font-size: 18px;
+    line-height: 32px;
+}
+
+.timeDesc i {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background: url(http://i1.ulecdn.com/i/event/2017/0919/khj/ms_clock.png) no-repeat left center;
+    background-size: contain;
+}
+
+.timeChoose {
+    display: flex;
+    display: -webkit-flex;
+}
+
+.timeChoose .time_jiangsu {
+    flex: 1;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+    background-color: #fae108;
+}
+
+.timeChoose .time_jiangsu.focus {
+    background-color: #f60;
+}
+
+.ul-style li {
+    position: relative;
+    float: left;
+    width: 49%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    background: #fff;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.ul-style li:nth-child(2n) {
+    margin-right: 0;
+}
+
+.picBox {
+    position: relative;
+    padding-bottom: 5px;
+    border-bottom: 1px solid transparent;
+}
+
+.picBox img {
+    width: 100%;
+    height: 100%;
+    min-height: 145px;
+}
+
+.name,
+.price {
+    margin: 0 4px;
+}
+
+.name {
+    height: 36px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.price {
+    line-height: 1;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    color: #ff5e36;
+    font-size: 14px;
+}
+
+.price-min {
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.price-min b {
+    color: #ff3300;
+    font-size: 20px;
+}
+
+.btn-buy,
+.ms_btn {
+    position: relative;
+    display: block;
+    margin: 0 8px 4px;
+    padding: 6px;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 18px;
+    background-image: -webkit-linear-gradient(left, #ff486e, #ff0236);
+    background-image: linear-gradient(left, #ff486e, #ff0236);
+}
+
+.btn-default {
+    background: #dadada;
+}
+
+
+/* seckill module end */
+
+.ruleBox {
+    color: #fff;
+    margin: 0 2%;
+    padding-top: 24px;
+    padding-bottom: 50px
+}
+
+.ruleTitle {
+    padding: 8px 0;
+    font-size: 20px
+}
+
+.ruleUl li {
+    padding-left: 1em;
+    text-indent: -1em;
+    line-height: 1.5;
+    font-size: 12px;
+    text-align: justify
+}
+
+.ruleUl li a {
+    color: #FFF
+}
+
+.tipBox {
+    width: 80%;
+    font-size: 16px;
+    position: fixed;
+    left: 10%;
+    top: 30%;
+    background-color: rgba(0, 0, 0, .8);
+    text-align: center;
+    color: #fff;
+    line-height: 40px;
+    z-index: 99998;
+    border-radius: 5px
+}
+
+.tips_overlay .tipBox.mask-in {
+    background-color: rgba(0, 0, 0, .8)
+}
+
+.tips_overlay .tipBox.mask-out {
+    background-color: #000
+}
+
+.tipBox.active {
+    -webkit-animation: 1s move alternate 4
+}
+
+.tipBox .msg {
+    padding: 20px 0
+}
+
+.tipBox h2 {
+    line-height: 24px;
+    font-weight: 400;
+    text-align: center;
+    font-size: 16px
+}
+
+.tipBox i {
+    vertical-align: middle;
+    display: inline-block;
+    width: .1px;
+    height: 100%
+}
+
+.overlay,
+.tips_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .8);
+    transition: all .2s ease-in-out;
+    opacity: 0
+}
+
+.tips_overlay {
+    background-color: transparent
+}
+
+.overlay-in {
+    opacity: 1
+}
+
+.overlay-out {
+    opacity: 0
+}
+
+.loading_box {
+    width: 80%;
+    font-size: 16px;
+    position: fixed;
+    left: 10%;
+    top: 30%;
+    background-color: #000;
+    text-align: center;
+    color: #fff;
+    z-index: 98;
+    border-radius: 5px;
+    padding: 10px 0
+}
+
+.loading_wrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: none
+}
+
+.title_img {
+    padding: 6px 0
+}
+
+.scan_area .title_img {
+    padding: 0 0 6px 0
+}
+
+.scan_area ul.list li.col-2 {
+    margin: 1%;
+    width: 48%;
+    float: left;
+    margin: 1%;
+    overflow: hidden;
+    padding: 5px;
+    box-sizing: border-box;
+    background: #fff;
+    position: relative;
+    font-family: 'microsoft yahei'
+}
+
+.add_popewm ul li .pop_box,
+.scan_area ul.list li.col-2 .img_mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center
+}
+
+.scan_area ul.list li.col-2 .img_mask .img_box {
+    position: relative;
+    height: 130px;
+    width: 110px
+}
+
+.scan_area ul.list li.col-2 .img_mask .img_box:after {
+    content: '截屏保存二维码';
+    background: #fff;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 2px 0;
+    color: #2f2f2f;
+    display: block
+}
+
+.scan_area ul.list li.col-2 .li_content {
+    width: 100%
+}
+
+.scan_area ul.list li.col-2 .r_div h3 {
+    padding: 5px 0;
+    box-sizing: border-box;
+    height: 45px;
+    font-weight: 400;
+    overflow: hidden;
+    color: #515151
+}
+
+.scan_area ul.list .price del {
+    color: #666;
+    display: block;
+    padding-top: 6px
+}
+
+.scan_area ul.list li.col-2 .r_div .price span {
+    color: #ff5502;
+    font-weight: 700
+}
+
+.scan_area ul.list li.col-2 .r_div .price span big {
+    font-size: 22px;
+    font-family: arial
+}
+
+.scan_area ul.list li.col-2 .r_div .btn {
+    background: #ff0336;
+    color: #fff;
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 8px 0;
+    margin-top: 10px
+}
+
+.scan_icon {
+    padding: 5px 10px;
+    font-style: normal;
+    display: inline-block;
+    background: #ff5502;
+    color: #FFF;
+    font-size: 14px;
+    margin-right: 4px;
+    border-radius: 20px
+}
+
+.add_popewm {
+    padding-top: 10px
+}
+
+.add_popewm ul {
+    width: 96%;
+    margin: 0 auto;
+    background: #ff427c;
+    padding: 1%;
+}
+
+.add_popewm ul li {
+    width: 48%;
+    float: left;
+    position: relative;
+    box-sizing: border-box;
+    margin: 1%
+}
+
+.add_popewm ul li .pop_imgbox {
+    position: relative;
+    width: 140px;
+    height: 180px;
+    text-align: center
+}
+
+.add_popewm ul li .pop_imgbox img {
+    max-width: 90%
+}
+
+.add_popewm ul li .pop_imgbox p {
+    font-size: 13px;
+    position: absolute;
+    display: block;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    line-height: 20px;
+    text-align: center;
+    padding: 2px 0;
+    color: #FFF
+}
+
+.add_popewm ul li .pop_box {
+    display: none
+}
