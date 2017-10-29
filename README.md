@@ -33,7 +33,9 @@ ule wap 文件路径:  /data/wwwroot/ulewap
 资源lib路径(邮乐资源服务器):    /ulewap/lib/
 http://i1.ulecdn.com/ulewap/lib
 
-主页：
+主页(邮乐中国)：     /event/2017/1101/
+http://www.ule.com/event/2017/1101/jsRead/index.html
+
 
 
 
