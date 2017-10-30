@@ -1,22 +1,24 @@
 requirejs.config({
     shim: {
-        "jw": ["jquery"],
-        "ule_plugin": ["jquery"],
-        "ule_wap": ["ule_plugin"],
-        "vue-lazyload": ["vue"],
+        // "jw": ["jquery"],
+        // "ule_plugin": ["jquery"],
+        // "ule_wap": ["ule_plugin"],
+        "ule": ["jquery"],
+        "vue-lazyload": ["vue"]
     },
     paths: {
         'jquery': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/jquery.min',
-        'jw': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/jw/jquery-weui.min',
         'fastclick': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/fastclick.min',
-        'ule_plugin': 'https://i1.beta.ulecdn.com/ulewap/ws/20171020/js/ule_plugin',
-        'ule_wap': 'https://i1.beta.ulecdn.com/ulewap/ws/20171020/js/ule_wap',
+        'ule': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/ule.min',
+        // 'jw': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/jw/jquery-weui.min',
+        // 'ule_plugin': 'https://i1.beta.ulecdn.com/ulewap/ws/20171020/js/ule_plugin',
+        // 'ule_wap': 'https://i1.beta.ulecdn.com/ulewap/ws/20171020/js/ule_wap',
         'vue': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/vue.min',
         'vue-lazyload': 'https://i1.beta.ulecdn.com/ulewap/ws/lib/js/vue-lazyload'
     }
 });
 
-require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_wap'], function($, Vue, FastClick, VueLazyload) {
+require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'ule'], function($, Vue, FastClick, VueLazyload) {
     Vue.use(VueLazyload, {
         loading: 'https://i0.ulecdn.com/ulewap/i/290x290x2x.png',
         listenEvents: ['scroll']
