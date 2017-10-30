@@ -132,11 +132,11 @@
             }
         });
     }
-
+    var storeId;
      var aass= getUserId(function() {
-        return this.storeId
+        storeId =  this.storeId
     })
-    console.log(aass)
+    console.log(storeId)
 
     /* 全局调用 分享 */
     var shareCall = function() {
