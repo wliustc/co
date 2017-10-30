@@ -199,10 +199,12 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'ule'], function($, Vue, 
                                 if (data.code == "0000") {
                                     // 获取成功
                                     if (data.content) {
+                                        _self.isGetCode = 0;
+                                        _self.vCodeBtnContent = maxtime + "s重新获取";
                                         var timer = setInterval(function() {
-                                            if (maxtime >= 1) {
+                                            if (maxtime >= 2) {
                                                 _self.isGetCode = 0;
-                                                _self.vCodeBtnContent = maxtime + "s重新获取";
+                                                _self.vCodeBtnContent = (maxtime - 1) + "s重新获取";
                                                 --maxtime;
                                             } else {
                                                 clearInterval(timer);
