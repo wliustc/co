@@ -235,7 +235,7 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
                     success: function(data) {
                         if (data.code == "0000") {
                             _self.picKey = data.content.key;
-                            _self.picUrl = 'http://' + data.content.imageURL;
+                            _self.picUrl = 'https://' + data.content.imageURL;
                         } else {
                             $.toast(data.message, "text");
                         }
