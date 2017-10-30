@@ -87,18 +87,18 @@ $(function() {
                             } else {
                                 //未分享-提示分享
                                 oThis.afterShareFlag = '####needCallAfterShare';
-                                $('.popBox .subinfo').html('<big>分享商品返回APP<br/>即可1元抢购</big><br/>商品售出还能获得收益');
+                                $('.popBox .subinfo').html('分享商品返回APP<br/>即可参与抢购<br/>商品售出还能获得收益');
                                 $('.popBox').show();
                             }
                             shareFlag = true;
                         } else {
                             //提示邀请好友
-                            $('.popBox .subinfo').html('<big>您已使用了抢购资格！</big><br/>抢购规则请查看活动详情<br>分享919购物节，好友下单还得返利！');
+                            $('.popBox .subinfo').html('您已使用了抢购资格！<br/>抢购规则请查看活动详情<br>分享邮乐爽11，好友下单得收益！');
                             $('.popBox').show();
                         }
                     } else {
                         //老用户-提示分享9.9购买的活动购买商品
-                        $('.popBox .subinfo').html('<big>很遗憾，<br>仅限新用户1元抢购，</big><br/>分享919购物节，好友下单还得返利！');
+                        $('.popBox .subinfo').html('很遗憾，<br>仅限新用户抢购，<br/>分享邮乐爽11，好友下单得收益！');
                         $('.popBox').show();
                     }
                 } else {
