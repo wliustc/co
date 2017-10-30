@@ -220,6 +220,8 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'ule'], function($, Vue, 
                             }
                         }
                     });
+                }else{
+                    _self.loadShow = 0;
                 }
             },
             // 获取图形验证码
