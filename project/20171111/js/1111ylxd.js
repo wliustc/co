@@ -147,7 +147,7 @@ $(function() {
         AppShareWX: function() {
             var oThis = this;
             oThis.shareimgUrl = 'https://pic.ule.com/item/user_0102/desc20170821/8e34a1486aa110ef_-1x-1.jpg';
-            oThis.shareUrl = 'https://www.' + uleUrl + '/app/yxd/2017/0919/919wx.html' + '?storeid=' + oThis.userId + '&adid=' + oThis.curApp + 'fx_merchant';
+            oThis.shareUrl = 'https://www.' + uleUrl + '/app/yxd/2017/1111/onebuy/index.html' + '?storeid=' + oThis.userId + '&adid=' + oThis.curApp + 'fx_merchant';
             oThis.sharetitle = '我在邮乐小店发现这些好东西，推荐你来一起看看！';
             oThis.sharecontent = '打开链接即可购买！精选商品，特色农品触手可及！';
             oThis.secTitle = oThis.sharecontent;
@@ -166,7 +166,7 @@ $(function() {
                 success: function(obj) {
                     oThis.userId = obj.useronlyid;
                     oThis.shareimgUrl = 'https://i0.' + uleUrl + '/app/yxd/i/2017/0919/919share_icon.jpg';
-                    oThis.shareUrl = 'https://www.' + uleUrl + '/app/yxd/2017/0919/919wx.html' + '?storeid=' + oThis.userId + '&adid=' + oThis.curApp + 'fx_merchant';
+                    oThis.shareUrl = 'https://www.' + uleUrl + '/app/yxd/2017/1111/onebuy/index.html' + '?storeid=' + oThis.userId + '&adid=' + oThis.curApp + 'fx_merchant';
                     callback && callback.apply(oThis);
                 },
                 error: function(jqXHR, errorStatus, errorThrown) {
