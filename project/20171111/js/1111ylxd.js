@@ -1,20 +1,20 @@
-uleUrl = 'beta.ule.com';
+uleUrl = 'ule.com';
 $(function() {
-sharelid='';
-shareFlag = false;
-shareMsCode = '';
+    sharelid = '';
+    shareFlag = false;
+    shareMsCode = '';
 
-window.afterShare  = function (){
+    window.afterShare = function() {
 
-	location.href =  'https://service.'+ uleUrl +'/seckill/item/detailYlxd/' + sharelid + '/' + shareMsCode + '?uleNeedNativeTitle=false&client_type=app_ylxd';
-}
-// alert提示层
+        location.href = 'https://service.' + uleUrl + '/seckill/item/detailYlxd/' + sharelid + '/' + shareMsCode + '?uleNeedNativeTitle=false&client_type=app_ylxd';
+    }
+    // alert提示层
     var _tip, tID;
     $('<div class="wrapper"></div>').appendTo("body");
     var tipBox = function(msg) {
         if (!msg) return;
         _tip && _tip.remove() && clearTimeout(tID);
-$('.load-wrapper').hide();
+        $('.load-wrapper').hide();
         _tip = $('<div class="tips_overlay">' +
             '<div class="tipBox">' +
             '<div class="msg"><h2><i></i>' + msg + '</h2></div>' +
@@ -39,7 +39,7 @@ $('.load-wrapper').hide();
             queryQualification: 'https://vps.' + uleUrl + '/yzgApiWAR/ylxd/user/judgeYlxdActivity.do?jsoncallback=?'
         },
         lid: '',
-afterShareFlag :'',
+        afterShareFlag: '',
         userId: '',
         curApp: 'ylxd',
         init: function() {
@@ -66,10 +66,13 @@ afterShareFlag :'',
             // }
 
 
-            $.getJSON(oThis.api.queryQualification, { 'activityCode': code, 'clientCallType': 'H5' }, function(o) {
+            $.getJSON(oThis.api.queryQualification, {
+                'activityCode': code,
+                'clientCallType': 'H5'
+            }, function(o) {
                 if (o.returnCode == '0000') {
-shareFlag = false;
-$('.load-wrapper').hide();
+                    shareFlag = false;
+                    $('.load-wrapper').hide();
                     if (o.data.userFlag == '1') {
                         //新用户
                         if (o.data.useQualityFlag == '0') {
@@ -77,30 +80,30 @@ $('.load-wrapper').hide();
                             if (o.data.shareFlag == '1') {
                                 //已分享-可秒杀
                                 // 跳vi页
-							sharelid = oThis.lid;
-							sharelid = oThis.channelCode;
-							oThis.afterShareFlag = '####needCallAfterShare';
-                                location.href = 'https://service.'+ uleUrl +'/seckill/item/detailYlxd/' + oThis.lid + '/' + oThis.channelCode + '?uleNeedNativeTitle=false&client_type=app_ylxd';
+                                sharelid = oThis.lid;
+                                sharelid = oThis.channelCode;
+                                oThis.afterShareFlag = '####needCallAfterShare';
+                                location.href = 'https://service.' + uleUrl + '/seckill/item/detailYlxd/' + oThis.lid + '/' + oThis.channelCode + '?uleNeedNativeTitle=false&client_type=app_ylxd';
                             } else {
                                 //未分享-提示分享
                                 oThis.afterShareFlag = '####needCallAfterShare';
                                 $('.popBox .subinfo').html('<big>分享商品返回APP<br/>即可1元抢购</big><br/>商品售出还能获得收益');
                                 $('.popBox').show();
                             }
-shareFlag = true;
+                            shareFlag = true;
                         } else {
                             //提示邀请好友
-                            $('.popBox .subinfo').html('<big>您已经兑换过啦！</big><br/>分享精选商品到微信看看吧');
+                            $('.popBox .subinfo').html('<big>您已使用了抢购资格！</big><br/>抢购规则请查看活动详情<br>分享919购物节，好友下单还得返利！');
                             $('.popBox').show();
                         }
                     } else {
                         //老用户-提示分享9.9购买的活动购买商品
-                        $('.popBox .subinfo').html('<big>很遗憾，仅限新用户1元抢购，</big><br/>分享精选商品到微信看看吧');
+                        $('.popBox .subinfo').html('<big>很遗憾，<br>仅限新用户1元抢购，</big><br/>分享919购物节，好友下单还得返利！');
                         $('.popBox').show();
                     }
-                }else{
-	tipBox(o.returnMessage);
-}
+                } else {
+                    tipBox(o.returnMessage);
+                }
             })
         },
         /**
@@ -128,13 +131,13 @@ shareFlag = true;
                 jsonp: "jsoncallback",
                 url: '//vps.' + uleUrl + '/yzgApiWAR/ylxd/item/shareListingURL.do',
                 data: {
-"activityCode": oThis.channelCode,
+                    "activityCode": oThis.channelCode,
                     'clientCallType': 'H5',
                     'data': JSON.stringify(obj)
                 },
                 success: function(obj) {
                     if (obj.returnCode == '0000') {
-                     //   oThis.shareId = obj.data.shareId;
+                        //   oThis.shareId = obj.data.shareId;
 
                         callback && callback.call(oThis);
                     }
@@ -149,7 +152,7 @@ shareFlag = true;
             oThis.sharecontent = '打开链接即可购买！精选商品，特色农品触手可及！';
             oThis.secTitle = oThis.sharecontent;
             // oThis.secTitle = oThis.sharetitle;
-            window.location.href = "uleMobile://uleShare_" + encodeURI(oThis.sharetitle.replace(/%/, '')) + "##" + encodeURI(oThis.sharecontent) + "##" + oThis.shareimgUrl + "##" + oThis.shareUrl +oThis.afterShareFlag;
+            window.location.href = "uleMobile://uleShare_" + encodeURI(oThis.sharetitle.replace(/%/, '')) + "##" + encodeURI(oThis.sharecontent) + "##" + oThis.shareimgUrl + "##" + oThis.shareUrl + oThis.afterShareFlag;
 
         },
         getUserId: function(callback) {
@@ -175,13 +178,13 @@ shareFlag = true;
             var oThis = this;
             //兑换
             $('.wrapUl').on('click', '.col-2', function() {
-$('.load-wrapper').show();
-               sharelid = oThis.lid = $(this).data('id') + '';
-				oThis.sharePrice = $(this).data('price') + '';
-shareMsCode = oThis.channelCode = $(this).data('code') + '';
- location.href = 'https://service.'+ uleUrl +'/seckill/item/detailYlxd/' + oThis.lid + '/' + oThis.channelCode + '?uleNeedNativeTitle=false&client_type=app_ylxd';
+                $('.load-wrapper').show();
+                sharelid = oThis.lid = $(this).data('id') + '';
+                oThis.sharePrice = $(this).data('price') + '';
+                shareMsCode = oThis.channelCode = $(this).data('code') + '';
 
-               // oThis.queryQualification(oThis.channelCode);
+
+                oThis.queryQualification(oThis.channelCode);
             })
             $('.popBox .close').click(function() {
                 $('.popBox').hide();
@@ -190,13 +193,13 @@ shareMsCode = oThis.channelCode = $(this).data('code') + '';
                 $('.ruleBox').show();
             })
             $('.ruleBox .close').click(function() {
-                    $('.ruleBox').hide();
-                })
-                //取消分享
+                $('.ruleBox').hide();
+            })
+            //取消分享
             $('.cancle').click(function() {
-                    $('.popBox').hide();
-                })
-                //分享
+                $('.popBox').hide();
+            })
+            //分享
             $('.share-btn').click(function() {
                 $('.popBox').hide();
                 oThis.shareListingURL(oThis.AppShareWX);
