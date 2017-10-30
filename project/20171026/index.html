@@ -68,8 +68,7 @@
                         </div>
                     </div>
                     <div class="main-footer weui-flex__item">
-                        <button v-if="isGetCode == 1" @click="getVcode()" style="color:#333333;background-color:#fec535;border:0;display:block;height:100%;width:100%">{{ vCodeBtnContent }}</button>
-                        <button v-else style="color:#333333;background-color:#ffd471;border:0;display:block;height:100%;width:100%">{{ vCodeBtnContent }}</button>
+                        <button @click="getVcode()" v-bind:class="[isGetCode == 1 ? 'yes-btn' : 'no-btn']">{{ vCodeBtnContent }}</button>
                     </div>
                 </div>
                 <div class="weui-cells__tips" style="text-align:left;padding-left:90px;padding-right:0;color:#fd5453">

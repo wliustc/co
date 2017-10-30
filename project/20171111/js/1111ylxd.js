@@ -1,4 +1,4 @@
-uleUrl = 'ule.com';
+var uleUrl = location.host.substring(location.host.indexOf('.') + 1);
 $(function() {
     sharelid = '';
     shareFlag = false;
@@ -45,7 +45,6 @@ $(function() {
         init: function() {
             this.getUserId();
             this.bindEvent();
-
         },
         /**
          * 查询活动资格
@@ -182,8 +181,6 @@ $(function() {
                 sharelid = oThis.lid = $(this).data('id') + '';
                 oThis.sharePrice = $(this).data('price') + '';
                 shareMsCode = oThis.channelCode = $(this).data('code') + '';
-
-
                 oThis.queryQualification(oThis.channelCode);
             })
             $('.popBox .close').click(function() {

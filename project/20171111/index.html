@@ -57,7 +57,7 @@
                 <div style="position: absolute;display: block;border: 0;margin: 0;top: 20%;
                 width: 60%;transform: translate(-50%, 0);-webkit-transform: translate(-50%, 0);left: 50%;" class="wrapper-body">
                     <p class="subinfo" style="color:#f7313d;font-size:12px">
-                            店主大人，注册账号可领取兑换资格！
+                        店主大人，注册账号可领取兑换资格！
                     </p>
                     <!-- <p class="subinfo">店主大人，注册账号可领取兑换资格！ -->
                     <!-- </p> -->
@@ -76,10 +76,9 @@
 <script src="//i0.beta.ulecdn.com/ulewap/j/common/seckillservice_v1.6.1.js"></script>
 <script src="./js/1111ylxd.js" /></script>
 <script>
-    uleUrl = 'beta.ule.com';
-    ms_code = 'MAF_FD';
+    var uleUrl = location.host.substring(location.host.indexOf('.') + 1),
+        ms_code = 'MAF_FD';
     $(function() {
-
         itemNum = 0;
         $.extend(String.prototype, {
             //method

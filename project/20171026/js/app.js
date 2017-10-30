@@ -179,49 +179,49 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'ule'], function($, Vue, 
             // 获取手机验证码
             getVcode() {
                 var _self = this
-                _self.loadShow = 1;
                 var maxtime = 60;
-                if (_self.phoneCheck() && _self.picCheck()) {
-                    $.ajax({
-                        type: "get",
-                        data: {
-                            activityCode: _self.apiData.code, //活动CODE
-                            mobile: _self.form.phone, //手机号
-                            picRandomCode: _self.form.pic, //用户填写的图形验证码
-                            key: _self.picKey //图形验证码返回的key
-                        },
-                        url: _self.apiData.api.getPhoneCode,
-                        dataType: "jsonp",
-                        jsonp: "callback",
-                        success: function(data) {
-                            _self.loadShow = 0;
-                            if (data.code == "0000") {
-                                // 获取成功
-                                if (data.content) {
-                                    timer = setInterval(function() {
-                                        if (maxtime >= 0) {
-                                            _self.isGetCode = 0;
-                                            _self.vCodeBtnContent = maxtime + "s重新获取";
-                                            --maxtime;
-                                        } else {
-                                            clearInterval(timer);
-                                            _self.isGetCode = 1;
-                                            _self.vCodeBtnContent = "获取验证码";
-                                            maxtime = 60;
-                                        }
-                                    }, 1000);
+                if (_self.isGetCode == 0) {
+                    return false
+                } else {
+                    if (_self.phoneCheck() && _self.picCheck()) {
+                        $.ajax({
+                            type: "get",
+                            data: {
+                                activityCode: _self.apiData.code, //活动CODE
+                                mobile: _self.form.phone, //手机号
+                                picRandomCode: _self.form.pic, //用户填写的图形验证码
+                                key: _self.picKey //图形验证码返回的key
+                            },
+                            url: _self.apiData.api.getPhoneCode,
+                            dataType: "jsonp",
+                            jsonp: "callback",
+                            success: function(data) {
+                                if (data.code == "0000") {
+                                    // 获取成功
+                                    if (data.content) {
+                                        var timer = setInterval(function() {
+                                            if (maxtime >= 1) {
+                                                _self.isGetCode = 0;
+                                                _self.vCodeBtnContent = maxtime + "s重新获取";
+                                                --maxtime;
+                                            } else {
+                                                clearInterval(timer);
+                                                _self.isGetCode = 1;
+                                                _self.vCodeBtnContent = "获取验证码";
+                                                maxtime = 60;
+                                            }
+                                        }, 1000);
+                                    } else {
+                                        _self.tip.vcodeTip = "请重新获取图片验证码";
+                                    }
+                                } else if (data.code == "1002") {
+                                    $.toast("手机号格式错误", "text");
                                 } else {
-                                    _self.tip.vcodeTip = "请重新获取图片验证码"
+                                    $.toast(data.message, "text");
                                 }
-                            } else if (data.code == "1002") {
-                                $.toast("手机号格式错误", "text");
-                            } else {
-                                $.toast(data.message, "text");
                             }
-                        }
-                    });
-                }else{
-                    _self.loadShow = 0;
+                        });
+                    }
                 }
             },
             // 获取图形验证码
