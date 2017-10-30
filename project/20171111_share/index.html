@@ -115,7 +115,7 @@
 
     })
 
-    var getUserId = function() {
+    var getUserId = function(callback) {
         var oThis = this;
         $.ajax({
             type: "get",
@@ -124,14 +124,18 @@
             dataType: "jsonp",
             jsonp: "jsonCallBack", //服务端用于接收callback调用的function名的参数
             success: function(obj) {
-                return obj.useronlyid;
+                oThis.storeId = userOnlyId = obj.useronlyid;
+                callback && callback.apply(oThis);
             },
             error: function(jqXHR, errorStatus, errorThrown) {
                 alert('请求服务失败');
             }
         });
     }
-    console.log(getUserId())
+
+    getUserId(function() {
+        console.log(this.storeId)
+    })
 
     /* 全局调用 分享 */
     var shareCall = function() {
