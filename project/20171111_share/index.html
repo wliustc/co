@@ -134,12 +134,14 @@
         });
     }
     getUserId(function() {
+        var oThis = this;
+        console.log(oThis.storeId)
         /* 全局调用 分享 */
         var shareCall = function() {
             //分享
             if ($.browser.ylxd) {
                 // var linkUrl = location.protocol + '//m.' + url + '/mxiaodian/store/index/' + keep.storeid + '.html?&storeid=' + keep.storeid + '&client_type=app_ylxd&adid=ylxdfx_store';
-                var linkUrl = location.protocol + '//www.' + uleUrl + '/app/yxd/2017/1111/recommend/index.html' + '?storeid=' + userOnlyId + '&adid=ylxdfx_merchant';
+                var linkUrl = location.protocol + '//www.' + uleUrl + '/app/yxd/2017/1111/recommend/index.html' + '?storeid=' + oThis.storeId + '&adid=ylxdfx_merchant';
             } else {
                 var linkUrl = location.protocol + '//m.' + url + '/mxiaodian/store/yzg/index/' + keep.storeid + '.html?&storeid=' + keep.storeid + '&client_type=app_yzg&adid=yzgfx_store';
             }
