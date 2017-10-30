@@ -312,15 +312,19 @@ body .banner a.rule-btn {
 }
 
 .ruleBox .rulewrapper {
-    width: 80%;
-    left: 10%;
-    top: 11%;
+    width: 90%;
+    font-size: 12px;
+    /* left: 5%; */
+    top: 10%;
     position: absolute;
-    background: #F44949;
+    background: url(../images/bgbg.png) no-repeat;
+    background-size: 100% 100%;
     border-radius: 10px;
-    color: #fff;
-    padding-top: 20px;
+    color: #333333;
+    padding-top: 80px;
     padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .popBox .popwrapper {
@@ -401,7 +405,7 @@ body .banner a.rule-btn {
 
 .ruleBox .rulewrapper p {
     line-height: 1.4em;
-    font-size: 15px;
+    font-size: 12px;
 }
 
 .ruleBox .rulewrapper .ruleBtn {
@@ -421,6 +425,7 @@ body .banner a.rule-btn {
 }
 
 .ruleBox .rulewrapper h3 {
+    color: #f7313d;
     font-size: 18px;
     text-align: center;
     font-weight: normal;
@@ -436,7 +441,6 @@ body .banner a.rule-btn {
 .ruleBox .rulewrapper .info {
     padding-top: 12px;
     line-height: 1.6em;
-    border-top: 1px solid #fff;
 }
 
 .ruleBox .rulewrapper p.subinfo {

@@ -115,7 +115,8 @@
 
     })
 
-    var getUserId = function() {
+    var userOnlyId = ''
+    var getUserId = function(callback) {
         var oThis = this;
         $.ajax({
             type: "get",
@@ -124,36 +125,37 @@
             dataType: "jsonp",
             jsonp: "jsonCallBack", //服务端用于接收callback调用的function名的参数
             success: function(obj) {
-                return obj.useronlyid;
+                oThis.storeId = userOnlyId = obj.useronlyid;
+                callback && callback.apply(oThis);
             },
             error: function(jqXHR, errorStatus, errorThrown) {
                 alert('请求服务失败');
             }
         });
     }
-    console.log(getUserId())
+    getUserId(function() {
+        /* 全局调用 分享 */
+        var shareCall = function() {
+            //分享
+            if ($.browser.ylxd) {
+                // var linkUrl = location.protocol + '//m.' + url + '/mxiaodian/store/index/' + keep.storeid + '.html?&storeid=' + keep.storeid + '&client_type=app_ylxd&adid=ylxdfx_store';
+                var linkUrl = location.protocol + '//www.' + uleUrl + '/app/yxd/2017/1111/recommend/index.html' + '?storeid=' + userOnlyId + '&adid=ylxdfx_merchant';
+            } else {
+                var linkUrl = location.protocol + '//m.' + url + '/mxiaodian/store/yzg/index/' + keep.storeid + '.html?&storeid=' + keep.storeid + '&client_type=app_yzg&adid=yzgfx_store';
+            }
+            var linkStr = keep.sharetitle + "##" + keep.sharecontent + "##" + keep.shareimgUrl + "##" + linkUrl + "&&WX##WF##QQ";
 
-    /* 全局调用 分享 */
-    var shareCall = function() {
-        //分享
-        if ($.browser.ylxd) {
-            // var linkUrl = location.protocol + '//m.' + url + '/mxiaodian/store/index/' + keep.storeid + '.html?&storeid=' + keep.storeid + '&client_type=app_ylxd&adid=ylxdfx_store';
-            var linkUrl = location.protocol + '//www.' + uleUrl + '/app/yxd/2017/1111/recommend/index.html' + '?storeid=' + getUserId() + '&adid=ylxdfx_merchant';
-        } else {
-            var linkUrl = location.protocol + '//m.' + url + '/mxiaodian/store/yzg/index/' + keep.storeid + '.html?&storeid=' + keep.storeid + '&client_type=app_yzg&adid=yzgfx_store';
-        }
-        var linkStr = keep.sharetitle + "##" + keep.sharecontent + "##" + keep.shareimgUrl + "##" + linkUrl + "&&WX##WF##QQ";
+            if ($.browser.android) {
+                window.group.jsMethod(linkStr);
+            } else if ($.browser.ios) {
+                return linkStr;
+            } else {
+                return linkStr;
+            }
+        };
 
-        if ($.browser.android) {
-            window.group.jsMethod(linkStr);
-        } else if ($.browser.ios) {
-            return linkStr;
-        } else {
-            return linkStr;
-        }
-    };
-
-    window.shareCall = shareCall;
+        window.shareCall = shareCall;
+    })
 </script>
 
 </html>
