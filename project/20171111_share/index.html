@@ -124,14 +124,14 @@
             dataType: "jsonp",
             jsonp: "jsonCallBack", //服务端用于接收callback调用的function名的参数
             success: function(obj) {
-                oThis.storeId = obj.useronlyid;
+                return obj.useronlyid;
             },
             error: function(jqXHR, errorStatus, errorThrown) {
                 alert('请求服务失败');
             }
         });
     }
-    console.log(getUserId().storeId)
+    console.log(getUserId())
 
     /* 全局调用 分享 */
     var shareCall = function() {
