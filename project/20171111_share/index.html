@@ -119,7 +119,7 @@
         var oThis = this;
         $.ajax({
             type: "get",
-            async: false,
+            async: 'false',
             url: "//my." + uleUrl + "/usr/getIndexCookies.do",
             dataType: "jsonp",
             jsonp: "jsonCallBack", //服务端用于接收callback调用的function名的参数
