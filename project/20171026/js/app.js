@@ -226,6 +226,8 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'ule'], function($, Vue, 
             getPic: function() {
                 var _self = this;
                 _self.loadShow = 1;
+                // 让图形验证码tip为空
+                _self.tip.vcodeTip = ""
                 $.ajax({
                     type: "get",
                     data: {
