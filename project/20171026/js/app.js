@@ -41,7 +41,8 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'ule'], function($, Vue, 
             picUrl: '',
             vCodeBtnContent: '获取验证码',
             apiData: {
-                code: 'MA_U_150906804308151',
+                code: 'MA_U_149499047383354',
+                // code: 'MA_U_150906804308151',
                 api: {
                     getPicCode: "//prize." + uleUrl + "/mc/mobileReceiveCoupons/getRandomCode", //获取图片验证码
                     getPhoneCode: '//prize.' + uleUrl + '/mc/mobileReceiveCoupons/validateCode', //获取手机验证码
@@ -63,9 +64,9 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'ule'], function($, Vue, 
             // 初始化
             FastClick.attach(document.body)
             // 初始化数据
-            this.apiData.api.getPicCode = this.env == 'development' ? "//prize.ule.com/mc/mobileReceiveCoupons/getRandomCode" : "//prize." + uleUrl + "/mc/mobileReceiveCoupons/getRandomCode"
-            this.apiData.api.getPhoneCode = this.env == 'development' ? "//prize.ule.com/mc/mobileReceiveCoupons/validateCode" : "//prize." + uleUrl + "/mc/mobileReceiveCoupons/validateCode"
-            this.apiData.api.sub = this.env == 'development' ? "//prize.ule.com/mc/mobileReceiveCoupons/receiveCoupons" : "//prize." + uleUrl + "/mc/mobileReceiveCoupons/receiveCoupons"
+            this.apiData.api.getPicCode = this.env == 'development' ? "//prize.beta.ule.com/mc/mobileReceiveCoupons/getRandomCode" : "//prize." + uleUrl + "/mc/mobileReceiveCoupons/getRandomCode"
+            this.apiData.api.getPhoneCode = this.env == 'development' ? "//prize.beta.ule.com/mc/mobileReceiveCoupons/validateCode" : "//prize." + uleUrl + "/mc/mobileReceiveCoupons/validateCode"
+            this.apiData.api.sub = this.env == 'development' ? "//prize.beta.ule.com/mc/mobileReceiveCoupons/receiveCoupons" : "//prize." + uleUrl + "/mc/mobileReceiveCoupons/receiveCoupons"
         },
         methods: {
             // 关闭弹窗
