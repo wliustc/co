@@ -44,7 +44,7 @@ require(['jquery', 'vue', 'fastclick', 'vue-lazyload', 'jw', 'ule_plugin', 'ule_
             // 活动API和key
             actData: {
                 keys: '2017jinronghuidingyue', //推荐位key 正式：2017jinronghuidingyue 测试：jsjinronglvka
-                code: 'MA_U_150892613555028', //活动code
+                code: 'MA_U_150892352712726', //活动code
                 api: {
                     getPrdsUrl: '//static-content.ulecdn.com/mobilead/recommond/dwRecommond.do?restype=2001', // 商品
                     queryQualification: '//prize.' + uleUrl + '/mc/jiangSuFinance/whiteListVerification', // 资格验证
